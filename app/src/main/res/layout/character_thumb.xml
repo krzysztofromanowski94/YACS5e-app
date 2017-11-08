@@ -13,13 +13,12 @@
         card_view:cardElevation="4dp"
         card_view:cardUseCompatPadding="true"
         card_view:cardCornerRadius="4dp">
-
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:id="@+id/imageView"
             android:scaleType="centerCrop" />
-
+      
         <TextView
             android:id="@+id/thumb_name"
             android:layout_width="match_parent"

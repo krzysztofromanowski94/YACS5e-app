@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         // TODO: Handle action bar item clicks here.
         int id = item.getItemId();
-
+        
         if (id == R.id.action_settings) {
             return true;
         }
@@ -71,13 +71,13 @@ public class MainActivity extends AppCompatActivity
         Intent newAct;
 
         if (id == R.id.nav_char_list) {
-
+        
         } else if (id == R.id.nav_camp_list) {
 
         } else if (id == R.id.nav_search_camps) {
 
         } else if (id == R.id.nav_manage) {
-
+        
         } else if (id == R.id.nav_rpc_test) {
             newAct = new Intent(this, LoginTest.class);
             startActivity(newAct);
