@@ -34,9 +34,6 @@ protobuf {
         }
     }
     generateProtoTasks {
-        all()*.plugins {
-            grpc {}
-        }
         all().each { task ->
             task.builtins {
                 remove java

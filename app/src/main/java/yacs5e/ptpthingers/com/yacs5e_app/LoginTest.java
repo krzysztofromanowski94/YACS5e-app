@@ -62,7 +62,10 @@ public class LoginTest extends AppCompatActivity {
                 YACS5eGrpc.YACS5eBlockingStub stub = YACS5eGrpc.newBlockingStub(mChannel);
 
                 // creating message
-                TUser user = TUser.newBuilder().setLogin(username).setPassword(userpass).build();
+                TUser user = TUser.newBuilder()
+                        .setLogin(username)
+                        .setPassword(userpass)
+                        .build();
                 // saving a reply
                 Empty reply = stub.login(user);
 
