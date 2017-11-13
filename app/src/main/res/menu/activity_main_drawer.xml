@@ -19,4 +19,8 @@
         android:id="@+id/nav_manage"
         android:icon="@drawable/ic_menu_manage"
         android:title="@string/action_settings" />
+    <item
+        android:id="@+id/nav_rpc_test"
+        android:icon="@drawable/ic_menu_share"
+        android:title="gRPC Test" />
 </menu>

@@ -1,5 +1,6 @@
 package yacs5e.ptpthingers.com.yacs5e_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -45,19 +46,16 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        // Inflate the menu
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        // TODO: Handle action bar item clicks here.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
+        
         if (id == R.id.action_settings) {
             return true;
         }
@@ -68,17 +66,21 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+        // TODO: Handle navigation view item clicks here.
         int id = item.getItemId();
+        Intent newAct;
 
         if (id == R.id.nav_char_list) {
-            // Handle the camera action
+        
         } else if (id == R.id.nav_camp_list) {
 
         } else if (id == R.id.nav_search_camps) {
 
         } else if (id == R.id.nav_manage) {
-
+        
+        } else if (id == R.id.nav_rpc_test) {
+            newAct = new Intent(this, LoginTest.class);
+            startActivity(newAct);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
