@@ -1,10 +1,8 @@
-package yacs5e.ptpthingers.com.yacs5e_app;
+package com.ptpthingers.yacs5e_app;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -12,11 +10,10 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.concurrent.TimeUnit;
 
-import io.grpc.Grpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
-public class LoginTest extends AppCompatActivity {
+public class LoginScreen extends AppCompatActivity {
 
     private Button mSendButton;
     private TextView mResultText;
@@ -24,7 +21,7 @@ public class LoginTest extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_test);
+        setContentView(R.layout.activity_login_screen);
 
         mSendButton = (Button) findViewById(R.id.send_button);
         mResultText = (TextView) findViewById(R.id.rpcText);

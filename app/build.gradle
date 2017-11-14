@@ -5,7 +5,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "27.0.0"
     defaultConfig {
-        applicationId "yacs5e.ptpthingers.com.yacs5e_app"
+        applicationId 'com.ptpthingers.yacs5e_app'
         minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
@@ -19,6 +19,8 @@ android {
         }
     }
     sourceSets { main { resources.srcDirs = ['src/main/resources', 'src/main/proto'] } }
+    productFlavors {
+    }
 }
 
 protobuf {
@@ -50,7 +52,7 @@ protobuf {
 
 dependencies {
     implementation 'com.google.android.gms:play-services-auth:11.4.2'
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -64,7 +66,6 @@ dependencies {
     compile 'io.grpc:grpc-okhttp:1.7.0'
     compile 'io.grpc:grpc-protobuf-lite:1.7.0'
     compile 'io.grpc:grpc-stub:1.7.0'
-    compile group: 'javax.annotation', name: 'javax.annotation-api', version: '1.2'
-
+    compile 'javax.annotation:javax.annotation-api:1.2'
     testCompile 'junit:junit:4.12'
 }
