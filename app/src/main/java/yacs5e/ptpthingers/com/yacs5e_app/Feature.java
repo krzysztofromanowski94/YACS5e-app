@@ -1,6 +1,6 @@
 package yacs5e.ptpthingers.com.yacs5e_app;
 
-class Features {
+class Feature {
     private int Index;
     private String Name;
     private int Level;
@@ -35,8 +35,8 @@ class Features {
         return CharacterClass;
     }
 
-    public void setClass(String aClass) {
-        CharacterClass = aClass;
+    public void setClass(String characterClass) {
+        CharacterClass = characterClass;
     }
 
     public String getDescription() {
