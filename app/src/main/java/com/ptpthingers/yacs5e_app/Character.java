@@ -41,10 +41,4 @@ class Character {
     public Character(int charFile) {
         //TODO: import character file and fill the object with parsed data
     }
-
-    public Character() {
-        charName = "Valindra";
-        shortDesc = "Tiefling Wizard (Evocation) 3";
-        portrait = R.drawable.side_nav_bar;
-    }
 }

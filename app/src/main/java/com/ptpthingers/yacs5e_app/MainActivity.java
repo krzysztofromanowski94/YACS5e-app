@@ -13,7 +13,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -104,27 +103,29 @@ public class MainActivity extends AppCompatActivity
         Class fragmentClass = null;
         Intent newAct;
 
-        if (id == R.id.nav_char_list) {
-            fragmentClass = CharacterList.class;
-
-        } else if (id == R.id.nav_camp_list) {
-            fragmentClass = CampaignList.class;
-
-        } else if (id == R.id.nav_search_camps) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_rpc_test) {
-            newAct = new Intent(this, LoginScreen.class);
-            startActivity(newAct);
+        switch (id) {
+            case R.id.nav_char_list:
+                fragmentClass = CharacterList.class;
+                break;
+            case R.id.nav_camp_list:
+                fragmentClass = CampaignList.class;
+                break;
+            case R.id.nav_search_camps:
+                //TODO: implement campaign search
+                break;
+            case R.id.nav_rpc_test:
+                newAct = new Intent(this, LoginScreen.class);
+                startActivity(newAct);
+                break;
         }
+
         try {
             fragment = (Fragment) fragmentClass.newInstance();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
