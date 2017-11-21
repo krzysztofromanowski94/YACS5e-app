@@ -1,6 +1,7 @@
 package com.ptpthingers.yacs5e_app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -64,6 +65,14 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("connection", MODE_PRIVATE);
+        boolean isFirstRun = sharedPreferences.getBoolean("FIRSTRUN", true);
+        if (isFirstRun) {
+            sharedPreferences.edit().putString("mHost","ptp-thingers.pl" ).apply();
+            sharedPreferences.edit().putInt("mPort", 13334).apply();
+            sharedPreferences.edit().putBoolean("FIRSTRUN", true).apply();
+        }
     }
 
     @Override
