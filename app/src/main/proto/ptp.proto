@@ -1,5 +1,8 @@
 syntax = "proto3";
 
+option java_package = "com.ptpthingers.yacs5e_app";
+option java_outer_classname = "YACSProto";
+option java_multiple_files = true;
 
 service YACS5e {
 
