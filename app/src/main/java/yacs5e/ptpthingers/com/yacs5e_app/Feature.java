@@ -1,5 +1,9 @@
 package yacs5e.ptpthingers.com.yacs5e_app;
 
+/**
+ * Created by Kacper on 15.11.2017.
+ */
+
 class Feature {
     private int Index;
     private String Name;
