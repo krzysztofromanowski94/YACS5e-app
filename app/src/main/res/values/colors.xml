@@ -3,6 +3,6 @@
     <color name="colorPrimary">#424242</color>
     <color name="colorPrimaryDark">#212121</color>
     <color name="colorAccent">#FF9100</color>
-    <color name="cardTextBG">#80000000</color>
-    <color name="cardText">#FFF</color>
+    <color name="cardTextdesc">#FFF</color>
+    <color name="loginScreenStatus">#20000000</color>
 </resources>

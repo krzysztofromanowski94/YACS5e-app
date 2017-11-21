@@ -9,19 +9,9 @@ class Character {
     Integer portrait;
     Integer profBonus;
 
-    AbilityScore strScore;
-    AbilityScore dexScore;
-    AbilityScore conScore;
-    AbilityScore intScore;
-    AbilityScore wisScore;
-    AbilityScore chaScore;
+    AbilityScore strScore, dexScore, conScore, intScore, wisScore, chaScore;
 
-    SavingThrow strSave;
-    SavingThrow dexSave;
-    SavingThrow conSave;
-    SavingThrow intSave;
-    SavingThrow wisSave;
-    SavingThrow chaSave;
+    SavingThrow strSave, dexSave, conSave, intSave, wisSave, chaSave;
 
     Map levels;
 
@@ -39,6 +29,7 @@ class Character {
     }
 
     public Character(int charFile) {
-        //TODO: import character file and fill the object with parsed data
+        /* TODO: import character file and fill the object with parsed data
+        https://www.androidhive.info/2012/01/android-json-parsing-tutorial/ */
     }
 }

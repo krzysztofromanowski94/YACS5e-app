@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.ptpthingers.yacs5e_app.LoginScreen"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.LoginScreen"/>
     </application>
 
 </manifest>
