@@ -12,11 +12,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.ExecutionException;
 
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
-import io.grpc.StatusRuntimeException;
+import com.ptpthingers.grpctasks.GrpcLogin;
+import com.ptpthingers.grpctasks.GrpcResult;
+
 
 public class LoginScreen extends AppCompatActivity {
 
@@ -42,60 +42,26 @@ public class LoginScreen extends AppCompatActivity {
     private View.OnClickListener mLoginListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            new GrpcTask().execute();
-        }
-    };
-
-    private class GrpcTask extends AsyncTask<Void, Void, String> {
-        private String mHost;
-        private int mPort;
-        private ManagedChannel mChannel;
-        private SharedPreferences sp;
-
-
-        @Override
-        protected void onPreExecute() {
-
-            //these values work only for test purposes
-            mHost = "18.216.25.170";
-            mPort = 13334;
             if(mLoginText.getText().toString().isEmpty() || mPassText.getText().toString().isEmpty()) {
                 Toast.makeText(getApplicationContext(), "You need to fill in the fields!", Toast.LENGTH_SHORT).show();
-                this.cancel(false);
+                return;
             }
-        }
 
-        @Override
-        protected String doInBackground(Void... nothing) {
+            GrpcResult result;
             try {
-                // creating comm channel
-                mChannel = ManagedChannelBuilder.forAddress(mHost, mPort).usePlaintext(true).build();
-                // creating blocking stub for sync
-                YACS5eGrpc.YACS5eBlockingStub stub = YACS5eGrpc.newBlockingStub(mChannel);
-
-                // creating message
-                TUser user = TUser.newBuilder()
-                        .setLogin(mLoginText.getText().toString())
-                        .setPassword(mPassText.getText().toString())
-                        .build();
-                // saving a reply
-                Empty reply = stub.login(user);
-                return reply.toString();
-
-            } catch (StatusRuntimeException e) {
-                String staCode = e.getStatus().getDescription();
-                return "Couldn't sign in!\n" + staCode;
+                result = new GrpcLogin(getApplicationContext()).execute(
+                        mLoginText.getText().toString(),
+                        mPassText.getText().toString(),
+                        "token")
+                        .get();
+            } catch (InterruptedException | ExecutionException e) {
+                // ToDo: send email with stacktrace if this happens
+                result = new GrpcResult(false, "Something very wrong happened.");
+                e.printStackTrace();
             }
-        }
+            Toast.makeText(getApplicationContext(), result.toString(), Toast.LENGTH_SHORT).show();
 
-        @Override
-        protected void onPostExecute(String result) {
-            try {
-                mChannel.shutdown().awaitTermination(1, TimeUnit.SECONDS);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
-            mResultText.setText(result);
+//            mResultText.setText(result.toString());
         }
-    }
+    };
 }
