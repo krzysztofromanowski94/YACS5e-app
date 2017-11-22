@@ -1,4 +1,4 @@
-package yacs5e.ptpthingers.com.yacs5e_app;
+package com.ptpthingers.yacs5e_app;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -7,7 +7,7 @@ import android.support.test.runner.AndroidJUnit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Instrumentation test, which will execute on an Android device.
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("yacs5e.ptpthingers.com.yacs5e_app", appContext.getPackageName());
+        assertEquals("com.ptpthingers.yacs5e_app", appContext.getPackageName());
     }
 }

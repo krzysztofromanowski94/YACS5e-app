@@ -1,4 +1,4 @@
-package yacs5e.ptpthingers.com.yacs5e_app;
+package com.ptpthingers.yacs5e_app;
 
 class AbilityScore {
     Integer value;
@@ -6,12 +6,6 @@ class AbilityScore {
     Integer tempValue;
     Integer tempModifier;
     Boolean useTemp;
-
-    public AbilityScore() {
-        setValue(10);
-        setTempValue(0);
-        this.useTemp = Boolean.FALSE;
-    }
 
     public AbilityScore(Integer value, Integer tempValue, Boolean useTemp) {
         setValue(value);
