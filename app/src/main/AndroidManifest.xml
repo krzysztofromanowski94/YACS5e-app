@@ -2,8 +2,29 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ptpthingers.yacs5e_app">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission
+        android:name="android.permission.AUTHENTICATE_ACCOUNTS"
+        android:maxSdkVersion="22" />
+    <uses-permission
+        android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission
+        android:name="android.permission.INTERNET"/>
+    <uses-permission
+        android:name="android.permission.READ_SYNC_SETTINGS"/>
+    <uses-permission
+        android:name="android.permission.WRITE_SYNC_SETTINGS"/>
+
+    <uses-permission
+        android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission
+        android:name="android.permission.MANAGE_ACCOUNTS"/>
+    <uses-permission
+        android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+    <uses-permission
+        android:name="android.permission.WRITE_SYNC_SETTINGS"/>
+    <uses-permission
+        android:name="android.permission.READ_SYNC_STATS"/>
+
 
     <application
         android:allowBackup="true"
@@ -23,6 +44,56 @@
         </activity>
         <activity android:name="com.ptpthingers.yacs5e_app.LoginScreen"
             android:theme="@style/AppTheme.LoginScreen"/>
+        <!--<activity android:name="com.ptpthingers.yacs5e_app."-->
+            <!--android:theme="@style/AppTheme.LoginScreen"/>-->
+        <service
+            android:name="com.ptpthingers.synchronization.AuthenticatorService">
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator" />
+        </service>
+        <service
+            android:name="com.ptpthingers.synchronization.GrpcSyncService"
+            android:exported="true"
+            android:process=":sync">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter"/>
+            </intent-filter>
+            <meta-data android:name="android.content.SyncAdapter"
+                android:resource="@xml/syncadapter" />
+        </service>
+        <service android:name="com.ptpthingers.synchronization.AuthenticatorService">
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator"/>
+        </service>
+        <service
+            android:name="com.ptpthingers.synchronization.SyncService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/syncadapter"/>
+        </service>
+        <provider
+            android:name="com.ptpthingers.synchronization.StubProvider"
+            android:authorities="com.ptpthingers.synchronization"
+            android:exported="false"
+            android:syncable="true" >
+        </provider>
+        <provider
+            android:name="com.ptpthingers.synchronization.MyContentProvider"
+            android:authorities="com.ptpthingers.synchronization"
+            android:exported="false"
+            android:syncable="true"/>
     </application>
 
 </manifest>

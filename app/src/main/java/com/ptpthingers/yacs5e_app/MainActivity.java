@@ -17,7 +17,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
+
+import com.ptpthingers.synchronization.GeneralAccount;
+import com.ptpthingers.synchronization.SyncActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, CharacterList.OnFragmentInteractionListener,
@@ -73,6 +75,10 @@ public class MainActivity extends AppCompatActivity
             sharedPreferences.edit().putInt("mPort", 13334).apply();
             sharedPreferences.edit().putBoolean("FIRSTRUN", true).apply();
         }
+
+        // Create your sync account
+        GeneralAccount.createSyncAccount(this);
+
     }
 
     @Override
@@ -127,6 +133,10 @@ public class MainActivity extends AppCompatActivity
                 newAct = new Intent(this, LoginScreen.class);
                 startActivity(newAct);
                 break;
+//            case R.id.nav_sync_test:
+//                newAct = new Intent(this, SyncActivity.class);
+//                startActivity(newAct);
+//                break;
         }
 
         try {

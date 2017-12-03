@@ -23,6 +23,8 @@ public class LoginScreen extends AppCompatActivity {
     private Button mSendButton;
     private EditText mLoginText, mPassText;
     private TextView mResultText;
+    SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,10 @@ public class LoginScreen extends AppCompatActivity {
         mResultText.setMovementMethod(new ScrollingMovementMethod());
 
         mSendButton.setOnClickListener(mLoginListener);
+
+        // ToDo: Delete when pushing
+        mLoginText.setText("testUser");
+        mPassText.setText("testPass");
 
     }
 
@@ -54,6 +60,10 @@ public class LoginScreen extends AppCompatActivity {
                         mPassText.getText().toString(),
                         "token")
                         .get();
+
+                sharedPreferences = getSharedPreferences("account", MODE_PRIVATE);
+                sharedPreferences.edit().putString("username", mLoginText.getText().toString()).apply();
+                sharedPreferences.edit().putString("password", mPassText.getText().toString()).apply();
             } catch (InterruptedException | ExecutionException e) {
                 // ToDo: send email with stacktrace if this happens
                 result = new GrpcResult(false, "Something very wrong happened.");
