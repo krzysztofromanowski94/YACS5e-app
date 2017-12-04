@@ -19,7 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.ptpthingers.synchronization.GeneralAccount;
-import com.ptpthingers.synchronization.SyncActivity;
+//import com.ptpthingers.synchronization.SyncActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, CharacterList.OnFragmentInteractionListener,
@@ -76,9 +76,6 @@ public class MainActivity extends AppCompatActivity
             sharedPreferences.edit().putBoolean("FIRSTRUN", true).apply();
         }
 
-        // Create your sync account
-        GeneralAccount.createSyncAccount(this);
-
     }
 
     @Override
@@ -133,10 +130,10 @@ public class MainActivity extends AppCompatActivity
                 newAct = new Intent(this, LoginScreen.class);
                 startActivity(newAct);
                 break;
-//            case R.id.nav_sync_test:
-//                newAct = new Intent(this, SyncActivity.class);
-//                startActivity(newAct);
-//                break;
+            case R.id.nav_sync_test:
+                newAct = new Intent(this, SyncScreen.class);
+                startActivity(newAct);
+                break;
         }
 
         try {

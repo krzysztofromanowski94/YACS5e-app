@@ -19,10 +19,6 @@
     <uses-permission
         android:name="android.permission.MANAGE_ACCOUNTS"/>
     <uses-permission
-        android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
-    <uses-permission
-        android:name="android.permission.WRITE_SYNC_SETTINGS"/>
-    <uses-permission
         android:name="android.permission.READ_SYNC_STATS"/>
 
 
@@ -44,18 +40,9 @@
         </activity>
         <activity android:name="com.ptpthingers.yacs5e_app.LoginScreen"
             android:theme="@style/AppTheme.LoginScreen"/>
-        <!--<activity android:name="com.ptpthingers.yacs5e_app."-->
-            <!--android:theme="@style/AppTheme.LoginScreen"/>-->
-        <service
-            android:name="com.ptpthingers.synchronization.AuthenticatorService">
-            <intent-filter>
-                <action android:name="android.accounts.AccountAuthenticator"/>
-            </intent-filter>
-            <meta-data
-                android:name="android.accounts.AccountAuthenticator"
-                android:resource="@xml/authenticator" />
-        </service>
-        <service
+        <activity android:name="com.ptpthingers.yacs5e_app.SyncScreen"
+            android:theme="@style/AppTheme.LoginScreen"/>
+        <!--<service
             android:name="com.ptpthingers.synchronization.GrpcSyncService"
             android:exported="true"
             android:process=":sync">
@@ -64,7 +51,7 @@
             </intent-filter>
             <meta-data android:name="android.content.SyncAdapter"
                 android:resource="@xml/syncadapter" />
-        </service>
+        </service>-->
         <service android:name="com.ptpthingers.synchronization.AuthenticatorService">
             <intent-filter>
                 <action android:name="android.accounts.AccountAuthenticator"/>
