@@ -37,6 +37,9 @@ public class LoginScreen extends AppCompatActivity {
 
         mSendButton.setOnClickListener(mLoginListener);
 
+        mLoginText.setText("testUser");
+        mPassText.setText("testPass");
+
     }
 
     private View.OnClickListener mLoginListener = new View.OnClickListener() {

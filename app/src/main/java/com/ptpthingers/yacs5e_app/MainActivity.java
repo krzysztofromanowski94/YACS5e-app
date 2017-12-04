@@ -14,10 +14,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.ptpthingers.synchronization.GeneralAccount;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, CharacterList.OnFragmentInteractionListener,
@@ -73,6 +76,9 @@ public class MainActivity extends AppCompatActivity
             sharedPreferences.edit().putInt("mPort", 13334).apply();
             sharedPreferences.edit().putBoolean("FIRSTRUN", true).apply();
         }
+
+        // Create your sync account
+        GeneralAccount.createSyncAccount(this);
     }
 
     @Override
@@ -97,9 +103,18 @@ public class MainActivity extends AppCompatActivity
         // TODO: Handle action bar item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id) {
+            case R.id.action_settings:
+                return true;
+//            case R.id.manual_sync:
+//                Log.i("MainActivity", "manual sync");
+//                SyncAdapter.performSync();
+//                break;
         }
+
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
