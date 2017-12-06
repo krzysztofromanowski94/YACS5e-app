@@ -7,12 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.List;
+
 /**
  * Created by leo on 16.11.17.
  */
 
 public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.ViewHolder> {
-    private String[] mDataSet;
+    private List<Character> mDataSet;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView mCharacterName;
@@ -33,7 +35,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.View
         }
     }
 
-    public CharacterAdapter(String[] dataSet) {
+    public CharacterAdapter(List<Character> dataSet) {
         mDataSet = dataSet;
     }
 
@@ -45,8 +47,8 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        viewHolder.getCharacterName().setText(mDataSet[position]);
+    public void onBindViewHolder(ViewHolder viewHolder) {
+        viewHolder.getCharacterName().setText(mDataSet[]);
     }
 
     @Override

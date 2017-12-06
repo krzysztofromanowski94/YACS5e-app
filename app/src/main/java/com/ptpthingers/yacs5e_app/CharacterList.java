@@ -11,12 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 public class CharacterList extends Fragment {
 
     private RecyclerView mRecyclerView;
     private CharacterAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private String[] mDataset;
+    private List<Character> mDataset;
 
     private OnFragmentInteractionListener mListener;
 
