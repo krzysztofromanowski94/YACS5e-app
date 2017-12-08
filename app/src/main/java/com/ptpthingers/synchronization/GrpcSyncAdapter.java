@@ -19,12 +19,15 @@ import com.ptpthingers.yacs5e_app.TTalk;
 import com.ptpthingers.yacs5e_app.TUser;
 import com.ptpthingers.yacs5e_app.YACS5eGrpc;
 
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.logging.Level;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
+
+import static com.ptpthingers.yacs5e_app.TTalk.UnionCase.CHARACTER;
 
 /*
 * This file is about to be changed. Current state is for testing only.
@@ -43,6 +46,9 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
 
     private Context context;
     private final ContentResolver resolver;
+
+    private ArrayBlockingQueue<TTalk> messageQueue;
+    TTalk received;
 
 
 
@@ -64,61 +70,84 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
                               String authority,
                               ContentProviderClient contentProviderClient,
                               SyncResult syncResult) {
-//        initializeSyncAdapted(context);
 
         Log.i(TAG, "Starting synchronization...");
 
-
-
-//        ManagedChannel mChannel = ManagedChannelBuilder.forAddress(mHost, mPort).build();
         ManagedChannel mChannel = ManagedChannelSingleton.getManagedChannel(this.context);
         YACS5eGrpc.YACS5eStub asyncStub = YACS5eGrpc.newStub(mChannel);
 
-        StreamObserver<TTalk> responseStream = CreateResponseStreamObserver(asyncStub);
-//        StreamObserver<TTalk> requestStream = asyncStub.synchronize(responseStream);
+        StreamObserver<TTalk> requestStream = asyncStub.synchronize(CreateRequestStreamObserver());
 
-//        TTalk user = TTalk.
-
-//        TUser user = TUser.newBuilder().setLogin("testUser").setPassword("testPass");
-
+        // create user credentials message
         TTalk tTalk = TTalk.newBuilder().setUser(TUser.newBuilder()
                 .setLogin("testUser")
                 .setPassword("testPass"))
                 .build();
+        // send user credentials message
+        requestStream.onNext(tTalk);
 
+        // receive message to confirm logging
+        try {
+            received = messageQueue.take();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-        responseStream.onNext(tTalk);
+        switch (received.getUnionCase()) {
+            case GOOD:
+                if (received.getGood() != true) {
+                    Log.i(TAG, "Returning from attempt to login user");
+                    return;
+                }
+        }
 
-        TTalk tCharacter = TTalk.newBuilder().setCharacter(TCharacter.newBuilder()
-        .setBlob(ByteString.copyFromUtf8("\"asdasd\""))
-        .setTimestamp(123)
-        .setUuid(ByteString.copyFromUtf8("123123123"))).build();
+        // example character list
 
-        responseStream.onNext(tCharacter);
+        TCharacter[] characterList = new TCharacter[2];
 
-//        responseStream.onNext();
+        characterList[0] = TCharacter.newBuilder()
+                .setBlob(ByteString.copyFromUtf8("\"asdasd0\""))
+                .setTimestamp(123)
+                .setUuid(ByteString.copyFromUtf8("uuid0")).build();
 
-//        requestStream.onNext(tTalk);
+        characterList[1] = TCharacter.newBuilder()
+                .setBlob(ByteString.copyFromUtf8("\"asdasd1\""))
+                .setTimestamp(123)
+                .setUuid(ByteString.copyFromUtf8("uuid1")).build();
 
-//        requestStream.onCompleted();
+        for (TCharacter tCharacter : characterList) {
+            // send message about this character
+            requestStream.onNext(TTalk.newBuilder().setCharacter(tCharacter).build());
+
+            // receive server parsed character
+            try {
+                received = messageQueue.take();
+                Log.i(TAG, "messageQueue: " + received);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            // check if local data needs to be updated
+            
+        }
 
         Log.i(TAG, "Finished synchronization!");
 
     }
 
 
-    private StreamObserver<TTalk> CreateResponseStreamObserver(YACS5eGrpc.YACS5eStub asyncStub){
-        return asyncStub.synchronize(new StreamObserver<TTalk>() {
-
+    private StreamObserver<TTalk> CreateRequestStreamObserver(){
+        return new StreamObserver<TTalk>() {
             @Override
             public void onNext(TTalk value) {
-                Log.i(TAG, "ResponseStream: " + value.toString());
-//                TTalk.UnionCase asd = value.getUnionCase();
-//
-//
-//                switch (asd) {
-//                    case USER:
-//                }
+                try {
+                    Log.i(TAG, "Putting to messageQueue...");
+                    messageQueue.put(value);
+                    Log.i(TAG, "Putted to messageQueue...");
+                } catch (InterruptedException e) {
+                    Log.i(TAG, "Error putting messageQueue: " + e.getMessage());
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -126,14 +155,14 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
                 Status status = Status.fromThrowable(t);
                 Log.i(TAG, "onError: " + status.toString());
 
-
             }
 
             @Override
             public void onCompleted() {
+                Log.i(TAG, "Completed");
 
             }
-        });
+        };
     }
 
 
@@ -148,28 +177,21 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
         username = accountSharedPreferences.getString("username", "");
         password = accountSharedPreferences.getString("password", "");
 
+        messageQueue = new ArrayBlockingQueue<TTalk>(128);
+
 
 
     }
 
+    private class ReceivedMessage  {
+        private TTalk ttalk;
+        private boolean LOCK;
 
-//    private ManagedChannel openConnection(){
-//
-//    }
+        public ReceivedMessage() {
+            super();
+            LOCK = false;
+        }
+    }
 
-
-
-
-//    public static void performSync() {
-//        Log.i(TAG, "performSync ask for sync");
-//        Bundle b = new Bundle();
-//        b.putBoolean(ContentResolver.SYNC_EXTRAS_MANUAL, true);
-////        b.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
-//        Log.i(TAG, GeneralAccount.getAccount().toString() + " " + b.toString() );
-////        ContentResolver.
-//        ContentResolver.requestSync(GeneralAccount.getAccount(),
-//                "com.ptpthingers.yacs5e", b);
-//        Log.i(TAG, "performSync finished");
-//    }
 }
 
