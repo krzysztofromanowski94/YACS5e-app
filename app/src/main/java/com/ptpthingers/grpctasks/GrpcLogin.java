@@ -4,19 +4,19 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
+import com.ptpthingers.synchronization.ManagedChannelSingleton;
 import com.ptpthingers.yacs5e_app.TUser;
 import com.ptpthingers.yacs5e_app.YACS5eGrpc;
 
 import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
 
 
 public class GrpcLogin extends AsyncTask<String, Void, GrpcResult> {
     private String mHost;
     private Integer mPort;
-    Context context;
-    SharedPreferences sharedPreferences;
+    private Context context;
+    private SharedPreferences sharedPreferences;
 
     public GrpcLogin(Context context) {
         super();
@@ -44,7 +44,7 @@ public class GrpcLogin extends AsyncTask<String, Void, GrpcResult> {
             /* ToDo: In future there should be only one managed channel for application
                     * Singleton?
              */
-            ManagedChannel mChannel = ManagedChannelBuilder.forAddress(mHost, mPort).build();
+            ManagedChannel mChannel = ManagedChannelSingleton.getManagedChannel(this.context);
 
             YACS5eGrpc.YACS5eBlockingStub stub = YACS5eGrpc.newBlockingStub(mChannel);
 

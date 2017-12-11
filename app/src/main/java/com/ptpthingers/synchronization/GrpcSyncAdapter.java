@@ -9,25 +9,19 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SyncResult;
 import android.os.Bundle;
-import android.text.style.TtsSpan;
 import android.util.Log;
 
 import com.google.protobuf.ByteString;
-import com.ptpthingers.synchronization.GeneralAccount;
 import com.ptpthingers.yacs5e_app.TCharacter;
 import com.ptpthingers.yacs5e_app.TTalk;
 import com.ptpthingers.yacs5e_app.TUser;
 import com.ptpthingers.yacs5e_app.YACS5eGrpc;
 
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.logging.Level;
 
 import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
-
-import static com.ptpthingers.yacs5e_app.TTalk.UnionCase.CHARACTER;
 
 /*
 * This file is about to be changed. Current state is for testing only.
@@ -42,13 +36,13 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
     private SharedPreferences connectionSharedPreferences;
     private SharedPreferences accountSharedPreferences;
 
-    public static final String TAG = "GrpcSyncAdapter";
+    private static final String TAG = "GrpcSyncAdapter";
 
     private Context context;
     private final ContentResolver resolver;
 
     private ArrayBlockingQueue<TTalk> messageQueue;
-    TTalk received;
+    private TTalk received;
 
 
 
@@ -93,42 +87,61 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
             e.printStackTrace();
         }
 
+        if ( received == null ) {
+            Log.i(TAG, "received is null. Something is very wrong :(");
+            return;
+        }
+
         switch (received.getUnionCase()) {
             case GOOD:
-                if (received.getGood() != true) {
+                if (!received.getGood()) {
                     Log.i(TAG, "Returning from attempt to login user");
+                    // User is not logged in
                     return;
                 }
         }
+        // User is logged in
 
         // example character list
 
         TCharacter[] characterList = new TCharacter[2];
 
         characterList[0] = TCharacter.newBuilder()
-                .setBlob(ByteString.copyFromUtf8("\"asdasd0\""))
-                .setTimestamp(123)
-                .setUuid(ByteString.copyFromUtf8("uuid0")).build();
+                .setBlob(ByteString.copyFromUtf8(""))
+                .setTimestamp(1512954398)
+                .setUuid("1234567891234567").build();
 
         characterList[1] = TCharacter.newBuilder()
-                .setBlob(ByteString.copyFromUtf8("\"asdasd1\""))
-                .setTimestamp(123)
-                .setUuid(ByteString.copyFromUtf8("uuid1")).build();
+                .setBlob(ByteString.copyFromUtf8(""))
+                .setTimestamp(1512954574)
+                .setUuid("1234567891234568").build();
 
+        // send characters one-by-one
         for (TCharacter tCharacter : characterList) {
             // send message about this character
             requestStream.onNext(TTalk.newBuilder().setCharacter(tCharacter).build());
 
-            // receive server parsed character
+//          receive server parsed character
             try {
                 received = messageQueue.take();
-                Log.i(TAG, "messageQueue: " + received);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
             // check if local data needs to be updated
-            
+
+            Long timestampDifference = received.getCharacter().getTimestamp() - tCharacter.getTimestamp();
+
+            if (timestampDifference > 0) {
+                Log.i(TAG, "Timestamp is older on client");
+            }
+            else if (timestampDifference == 0) {
+                Log.i(TAG, "Timestamp is equal");
+            }
+            else if (timestampDifference < 0) {
+                Log.i(TAG, "Timestamp older on server");
+            }
+
         }
 
         Log.i(TAG, "Finished synchronization!");
@@ -142,6 +155,7 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
             public void onNext(TTalk value) {
                 try {
                     Log.i(TAG, "Putting to messageQueue...");
+//                    received = value;
                     messageQueue.put(value);
                     Log.i(TAG, "Putted to messageQueue...");
                 } catch (InterruptedException e) {
