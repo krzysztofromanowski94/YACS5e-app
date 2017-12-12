@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -17,13 +15,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
 
 import com.ptpthingers.synchronization.GeneralAccount;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, CharacterList.OnFragmentInteractionListener,
+        implements NavigationView.OnNavigationItemSelectedListener, CharacterListFragment.OnFragmentInteractionListener,
         CampaignList.OnFragmentInteractionListener {
 
     @Override
@@ -37,7 +33,7 @@ public class MainActivity extends AppCompatActivity
         if (savedInstanceState == null) {
             Fragment fragment = null;
             Class fragmentClass = null;
-            fragmentClass = CharacterList.class;
+            fragmentClass = CharacterListFragment.class;
 
             try {
                 fragment = (Fragment) fragmentClass.newInstance();
@@ -50,15 +46,6 @@ public class MainActivity extends AppCompatActivity
                     .replace(R.id.flContent, fragment)
                     .commit();
         }
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Implemented later", Snackbar.LENGTH_SHORT)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -130,7 +117,7 @@ public class MainActivity extends AppCompatActivity
 
         switch (id) {
             case R.id.nav_char_list:
-                fragmentClass = CharacterList.class;
+                fragmentClass = CharacterListFragment.class;
                 break;
             case R.id.nav_camp_list:
                 fragmentClass = CampaignList.class;

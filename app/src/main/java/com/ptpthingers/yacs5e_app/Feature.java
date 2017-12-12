@@ -1,4 +1,4 @@
-package yacs5e.ptpthingers.com.yacs5e_app;
+package com.ptpthingers.yacs5e_app;
 
 /**
  * Created by Kacper on 15.11.2017.
