@@ -41,9 +41,6 @@ public class GrpcLogin extends AsyncTask<String, Void, GrpcResult> {
             String username = inputParams[0];
             String userpass = inputParams[1];
 
-            /* ToDo: In future there should be only one managed channel for application
-                    * Singleton?
-             */
             ManagedChannel mChannel = ManagedChannelSingleton.getManagedChannel(this.context);
 
             YACS5eGrpc.YACS5eBlockingStub stub = YACS5eGrpc.newBlockingStub(mChannel);

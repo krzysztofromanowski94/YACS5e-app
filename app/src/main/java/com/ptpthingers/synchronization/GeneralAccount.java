@@ -12,7 +12,6 @@ public final class GeneralAccount {
      * to have different types, such as 'read-only', 'sync-only', & 'admin'.
      */
     private static final String ACCOUNT_TYPE = "com.ptpthingers.yacs5e";
-//    private static final String ACCOUNT_TYPE = "sync-only";
 
     /**
      * This is the name that appears in the Android 'Accounts' settings.
@@ -34,9 +33,6 @@ public final class GeneralAccount {
      * @param c {@link Context}
      */
     public static void createSyncAccount(Context c) {
-        // Flag to determine if this is a new account or not
-        boolean created = false;
-
         // Get an account and the account manager
         Account account = getAccount();
         AccountManager manager = (AccountManager)c.getSystemService(Context.ACCOUNT_SERVICE);
@@ -55,13 +51,6 @@ public final class GeneralAccount {
             // Recommend a schedule for automatic synchronization. The system may modify this based
             // on other scheduled syncs and network utilization.
             ContentResolver.addPeriodicSync(account, AUTHORITY, new Bundle(), SYNC_FREQUENCY);
-
-            created = true;
         }
-
-        // Force a sync if the account was just created
-//        if (created) {
-//            GrpcSyncAdapter.performSync();
-//        }
     }
 }

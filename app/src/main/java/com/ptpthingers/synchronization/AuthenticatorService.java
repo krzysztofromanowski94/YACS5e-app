@@ -14,7 +14,6 @@ public class AuthenticatorService extends Service {
     public void onCreate() {
         super.onCreate();
         this.mAuthenticator = new AccountAuthenticator(this);
-
     }
 
     @Nullable

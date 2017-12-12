@@ -45,8 +45,7 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
     private TTalk received;
 
 
-
-    public GrpcSyncAdapter(Context context, boolean autoInitialize) {
+    GrpcSyncAdapter(Context context, boolean autoInitialize) {
         super(context, autoInitialize);
         initializeSyncAdapted(context);
         this.resolver = context.getContentResolver();
@@ -103,25 +102,60 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
         // User is logged in
 
         // example character list
+        TCharacter[] characterList = new TCharacter[10];
 
-        TCharacter[] characterList = new TCharacter[2];
+        // 0. even - receive even timestamp from server
+        // 1 - newer on client - this.last_sync == server.last_sync && this.last_mod > this.last_sync - that's fine, just update
+        // 2 - newer on server - this.last_sync < server.last_sync && last_mod <= last_sync - that's fine, just update
+        // 3 - different on client - this.last_sync != server.last_sync && this.last_mod > this.last_sync - generate new uuid, send as new character
+        // 4 - not on server - receive timestamp == 0, send complete character
+        // 5 - to be deleted - set Character.Delete=true, send to server
+        // <6> - not on client - if server have more characters it will send them one-by-one until TTalk.Good=true
 
         characterList[0] = TCharacter.newBuilder()
                 .setBlob(ByteString.copyFromUtf8(""))
-                .setTimestamp(1512954398)
+                .setLastSync(1512954399)
                 .setUuid("1234567891234567").build();
 
         characterList[1] = TCharacter.newBuilder()
                 .setBlob(ByteString.copyFromUtf8(""))
-                .setTimestamp(1512954574)
+                .setLastSync(1512954576)
+                .setLastMod(1512954580)
                 .setUuid("1234567891234568").build();
 
+        characterList[2] = TCharacter.newBuilder()
+                .setBlob(ByteString.copyFromUtf8(""))
+                .setLastSync(1513023228)
+                .setUuid("1234567891234569").build();
+
+        characterList[3] = TCharacter.newBuilder()
+                .setBlob(ByteString.copyFromUtf8(""))
+                .setLastSync(1513023230)
+                .setUuid("1234567891234577").build();
+
+        characterList[4] = TCharacter.newBuilder()
+                .setBlob(ByteString.copyFromUtf8(""))
+                .setLastSync(1513023230)
+                .setUuid("1234567891234577").build();
+
         // send characters one-by-one
+        // 0. even - receive even timestamp from server
+        // 1 - newer on client - this.last_sync == server.last_sync && this.last_mod > this.last_sync - that's fine, just update
+        // 2 - newer on server && last_mod <= last_sync - that's fine, just update
+        // 3 - different on client - this.last_sync != server.last_sync && this.last_mod > this.last_sync - generate new uuid, send as new character
+        // 4 - not on server - receive timestamp == 0, send complete character
+        // 5 - to be deleted - set Character.Delete=true, send to server
+        // <6> - not on client - if server have more characters it will send them one-by-one until TTalk.Good=true
         for (TCharacter tCharacter : characterList) {
             // send message about this character
-            requestStream.onNext(TTalk.newBuilder().setCharacter(tCharacter).build());
+            requestStream.onNext(
+                    TTalk.newBuilder()
+                            .setCharacter(TCharacter.newBuilder()
+                                    .setLastSync(tCharacter.getLastSync())
+                                    .setUuid(tCharacter.getUuid()))
+                            .build());
 
-//          receive server parsed character
+            //receive server parsed character
             try {
                 received = messageQueue.take();
             } catch (InterruptedException e) {
@@ -130,22 +164,49 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
 
             // check if local data needs to be updated
 
-            Long timestampDifference = received.getCharacter().getTimestamp() - tCharacter.getTimestamp();
+            Long syncDifference = tCharacter.getLastSync() - received.getCharacter().getLastSync();
+            Long modDifference = tCharacter.getLastMod() - received.getCharacter().getLastMod();
+            Log.i(TAG, "Current character syncDifference: " + syncDifference + " & modDifference: " + modDifference);
 
-            if (timestampDifference > 0) {
-                Log.i(TAG, "Timestamp is older on client");
+            // 0. even - receive even timestamp from server
+            if (syncDifference == 0) {
+                Log.i(TAG, "Character is even (0) uuid: " + received.getCharacter().getUuid());
             }
-            else if (timestampDifference == 0) {
-                Log.i(TAG, "Timestamp is equal");
+
+            // 1 - newer on client - this.last_sync == server.last_sync && this.last_mod > this.last_sync - that's fine, just update
+            else if (syncDifference == 0 && modDifference > 0) {
+                Log.i(TAG, "Character is newer on client (1) uuid: " + received.getCharacter().getUuid());
+                // ToDo: generate proper uuid
+                String uuid = "111";
+                TCharacter newerCharacter = TCharacter.newBuilder()
+                        .setUuid(uuid)
+                        .setLastSync(System.currentTimeMillis() / 1000L)
+                        .setBlob(tCharacter.getBlob())
+                        .build();
+                requestStream.onNext(TTalk.newBuilder().setCharacter(newerCharacter).build());
             }
-            else if (timestampDifference < 0) {
-                Log.i(TAG, "Timestamp older on server");
+
+            // 2 - newer on server - receive complete character
+            else if (syncDifference > 0) {
+                Log.i(TAG, "Timestamp newer on server (1) uuid: " + received.getCharacter().getUuid());
+            }
+            // character not on server
+            // 3 - not on server - receive timestamp == 0, send complete character
+            else if (received.getCharacter().getLastSync() == 0) {
+                Log.i(TAG, "Character not on server (0) uuid: " + received.getCharacter().getUuid());
+                TCharacter newCharacter = TCharacter.newBuilder()
+                        .setUuid(tCharacter.getUuid())
+                        .setLastSync(tCharacter.getLastSync())
+                        .setBlob(tCharacter.getBlob())
+                        .build();
+                requestStream.onNext(TTalk.newBuilder().setCharacter(newCharacter).build());
             }
 
         }
 
-        Log.i(TAG, "Finished synchronization!");
+        requestStream.onNext(TTalk.newBuilder().setGood(true).build());
 
+        Log.i(TAG, "Finished synchronization!");
     }
 
 
@@ -154,10 +215,7 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
             @Override
             public void onNext(TTalk value) {
                 try {
-                    Log.i(TAG, "Putting to messageQueue...");
-//                    received = value;
                     messageQueue.put(value);
-                    Log.i(TAG, "Putted to messageQueue...");
                 } catch (InterruptedException e) {
                     Log.i(TAG, "Error putting messageQueue: " + e.getMessage());
                     e.printStackTrace();
@@ -179,7 +237,6 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
         };
     }
 
-
     private void initializeSyncAdapted(Context context){
         this.context = context;
 
@@ -192,20 +249,6 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
         password = accountSharedPreferences.getString("password", "");
 
         messageQueue = new ArrayBlockingQueue<TTalk>(128);
-
-
-
     }
-
-    private class ReceivedMessage  {
-        private TTalk ttalk;
-        private boolean LOCK;
-
-        public ReceivedMessage() {
-            super();
-            LOCK = false;
-        }
-    }
-
 }
 

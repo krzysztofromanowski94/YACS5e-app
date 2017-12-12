@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 
-public class CharListContentProvider extends ContentProvider {
+public class CharacterContentProvider extends ContentProvider {
     @Override
     public boolean onCreate() {
         return false;

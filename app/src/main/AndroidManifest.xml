@@ -30,7 +30,7 @@
         <activity android:name="com.ptpthingers.yacs5e_app.LoginScreen"
             android:theme="@style/AppTheme.LoginScreen"/>
         <provider
-            android:name="com.ptpthingers.synchronization.CharListContentProvider"
+            android:name="com.ptpthingers.synchronization.CharacterContentProvider"
             android:authorities="com.ptpthingers.synchronization"
             android:exported="false"
             android:syncable="true"/>
