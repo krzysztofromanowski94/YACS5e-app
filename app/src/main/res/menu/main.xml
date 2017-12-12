@@ -6,4 +6,9 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+<!--    <item
+        android:id="@+id/manual_sync"
+        android:orderInCategory="100"
+        android:title="Manual Sync"
+        app:showAsAction="never" />-->
 </menu>
