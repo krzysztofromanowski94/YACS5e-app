@@ -7,9 +7,9 @@ class AbilityScore {
     Integer tempModifier;
     Boolean useTemp;
 
-    public AbilityScore(Integer value, Integer tempValue, Boolean useTemp) {
+    public AbilityScore(Integer value) {
         setValue(value);
-        setTempValue(tempValue);
+        setTempValue(value);
         this.useTemp = Boolean.FALSE;
     }
 

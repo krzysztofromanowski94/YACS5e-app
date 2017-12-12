@@ -1,58 +1,84 @@
 package com.ptpthingers.yacs5e_app;
 
-import android.support.design.widget.Snackbar;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.util.List;
 
 /**
  * Created by leo on 16.11.17.
  */
 
-public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.ViewHolder> {
-    private String[] mDataSet;
+public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder> {
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView mCharacterName;
+    private static List<Character> mCharacterList;
 
-        public ViewHolder(View v) {
-            super(v);
-            v.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Snackbar.make(v, "Clicked on a card!", Snackbar.LENGTH_LONG).show();
-                }
-            });
-            mCharacterName = (TextView) v.findViewById(R.id.thumb_name);
-        }
-
-        public TextView getCharacterName() {
-            return mCharacterName;
-        }
+    public CharacterAdapter(List<Character> characterList) {
+        mCharacterList = characterList;
     }
 
-    public CharacterAdapter(String[] dataSet) {
-        mDataSet = dataSet;
-    }
-
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View v = LayoutInflater.from(viewGroup.getContext())
+    public CharacterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        View itemView = LayoutInflater.
+                from(viewGroup.getContext())
                 .inflate(R.layout.character_thumb, viewGroup, false);
 
-        return new ViewHolder(v);
+        return new CharacterViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        viewHolder.getCharacterName().setText(mDataSet[position]);
+    public void onBindViewHolder(CharacterViewHolder viewHolder, int position) {
+        Character character = mCharacterList.get(position);
+        viewHolder.mCharacterName.setText(character.getCharName());
+        viewHolder.mCharacterDesc.setText(character.getShortDesc());
+        viewHolder.mFavButton.setEnabled(character.getFavourite());
     }
 
     @Override
     public int getItemCount() {
-        return mDataSet.length;
+        return mCharacterList.size();
     }
 
+    // ViewHolder Implementation.
+    // Assign Name, ShortDesc, portrait and favourite status to the CharacterThumb Card
+    public static class CharacterViewHolder extends RecyclerView.ViewHolder {
+
+        private final Context mContext;
+
+        private final ImageView mCharacterPortrait;
+        private final TextView mCharacterName;
+        private final TextView mCharacterDesc;
+        private final ImageButton mFavButton;
+
+        public CharacterViewHolder(final View v) {
+            super(v);
+            mContext = v.getContext();
+            mCharacterPortrait = (ImageView) v.findViewById(R.id.thumb_image);
+            mCharacterName = (TextView) v.findViewById(R.id.thumb_name);
+            mCharacterDesc = (TextView) v.findViewById(R.id.thumb_desc);
+            mFavButton = (ImageButton) v.findViewById(R.id.thumb_fav);
+
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    GsonBuilder builder = new GsonBuilder();
+                    Gson gson = builder.create();
+                    builder.serializeNulls();
+                    Intent characterSheet = new Intent(mContext, CharacterSheetActivity.class);
+                    characterSheet.putExtra("CHARACTER", gson.toJson(mCharacterList.get(getAdapterPosition())));
+                    mContext.startActivity(characterSheet);
+                }
+            });
+        }
+    }
 
 }
