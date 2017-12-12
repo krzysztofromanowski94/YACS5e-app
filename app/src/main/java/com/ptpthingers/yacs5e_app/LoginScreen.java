@@ -1,9 +1,6 @@
 package com.ptpthingers.yacs5e_app;
 
-import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -12,10 +9,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.concurrent.ExecutionException;
-
 import com.ptpthingers.grpctasks.GrpcLogin;
 import com.ptpthingers.grpctasks.GrpcResult;
+
+import java.util.concurrent.ExecutionException;
 
 
 public class LoginScreen extends AppCompatActivity {
@@ -36,7 +33,6 @@ public class LoginScreen extends AppCompatActivity {
         mResultText.setMovementMethod(new ScrollingMovementMethod());
 
         mSendButton.setOnClickListener(mLoginListener);
-
     }
 
     private View.OnClickListener mLoginListener = new View.OnClickListener() {
@@ -55,13 +51,10 @@ public class LoginScreen extends AppCompatActivity {
                         "token")
                         .get();
             } catch (InterruptedException | ExecutionException e) {
-                // ToDo: send email with stacktrace if this happens
                 result = new GrpcResult(false, "Something very wrong happened.");
                 e.printStackTrace();
             }
             Toast.makeText(getApplicationContext(), result.toString(), Toast.LENGTH_SHORT).show();
-
-//            mResultText.setText(result.toString());
         }
     };
 }
