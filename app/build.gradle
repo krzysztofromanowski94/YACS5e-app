@@ -53,9 +53,6 @@ protobuf {
 dependencies {
     implementation 'com.google.android.gms:play-services-auth:11.6.0'
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
     compile 'com.android.support:appcompat-v7:27.0.1'
     compile 'com.android.support:design:27.0.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -68,6 +65,10 @@ dependencies {
     compile 'io.grpc:grpc-stub:1.7.0'
     compile 'javax.annotation:javax.annotation-api:1.2'
     compile 'android.arch.persistence.room:runtime:1.0.0'
+    compile 'com.google.code.gson:gson:2.8.2'
     annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
     testCompile 'junit:junit:4.12'
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
 }

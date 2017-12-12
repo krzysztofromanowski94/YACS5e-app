@@ -1,0 +1,342 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ptpthingers.yacs5e_app.CharacterSheetAbilityScoresFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/fab_margin">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/modDesc"
+                android:layout_width="45sp"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@id/valueDesc"
+                android:gravity="center"
+                android:text="mod"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/valueDesc"
+                android:layout_width="24sp"
+                android:layout_height="14sp"
+                android:layout_toStartOf="@id/saveDesc"
+                android:gravity="center"
+                android:text="value"
+                android:textSize="9sp" />
+
+            <TextView
+                android:id="@+id/saveDesc"
+                android:layout_width="45sp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:gravity="center"
+                android:padding="0sp"
+                android:text="save"
+                android:inputType="textCapCharacters"
+                android:textSize="10sp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45sp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="45sp"
+                android:layout_alignParentStart="true"
+                android:gravity="center"
+                android:text="Strength"
+                android:padding="5dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/strMod"
+                android:layout_width="45sp"
+                android:layout_height="45sp"
+                android:layout_toStartOf="@id/strValue"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="0"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/strValue"
+                android:layout_width="24sp"
+                android:layout_height="45sp"
+                android:layout_toStartOf="@id/strSave"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="10" />
+
+            <TextView
+                android:id="@+id/strSave"
+                android:layout_width="45sp"
+                android:layout_height="45sp"
+                android:layout_alignParentEnd="true"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="0"
+                android:textSize="30sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"
+            android:layout_marginHorizontal="30dp"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45sp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="45sp"
+                android:layout_alignParentStart="true"
+                android:gravity="center"
+                android:text="Dexterity"
+                android:padding="5dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/dexMod"
+                android:layout_width="45sp"
+                android:layout_height="45sp"
+                android:layout_toStartOf="@id/dexValue"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="0"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/dexValue"
+                android:layout_width="24sp"
+                android:layout_height="45sp"
+                android:layout_toStartOf="@id/dexSave"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="10" />
+
+            <TextView
+                android:id="@+id/dexSave"
+                android:layout_width="45sp"
+                android:layout_height="45sp"
+                android:layout_alignParentEnd="true"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="0"
+                android:textSize="30sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"
+            android:layout_marginHorizontal="30dp"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45sp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="45sp"
+                android:layout_alignParentStart="true"
+                android:gravity="center"
+                android:text="Constitution"
+                android:padding="5dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/conMod"
+                android:layout_width="45sp"
+                android:layout_height="45sp"
+                android:layout_toStartOf="@id/conValue"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="0"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/conValue"
+                android:layout_width="24sp"
+                android:layout_height="45sp"
+                android:layout_toStartOf="@id/conSave"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="10" />
+
+            <TextView
+                android:id="@+id/conSave"
+                android:layout_width="45sp"
+                android:layout_height="45sp"
+                android:layout_alignParentEnd="true"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="0"
+                android:textSize="30sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"
+            android:layout_marginHorizontal="30dp"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45sp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="45sp"
+                android:layout_alignParentStart="true"
+                android:gravity="center"
+                android:text="Intelligence"
+                android:padding="5dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/intMod"
+                android:layout_width="45sp"
+                android:layout_height="45sp"
+                android:layout_toStartOf="@id/intValue"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="0"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/intValue"
+                android:layout_width="24sp"
+                android:layout_height="45sp"
+                android:layout_toStartOf="@id/intSave"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="10" />
+
+            <TextView
+                android:id="@+id/intSave"
+                android:layout_width="45sp"
+                android:layout_height="45sp"
+                android:layout_alignParentEnd="true"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="0"
+                android:textSize="30sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"
+            android:layout_marginHorizontal="30dp"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45sp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="45sp"
+                android:layout_alignParentStart="true"
+                android:gravity="center"
+                android:text="Wisdom"
+                android:padding="5dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/wisMod"
+                android:layout_width="45sp"
+                android:layout_height="45sp"
+                android:layout_toStartOf="@id/wisValue"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="0"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/wisValue"
+                android:layout_width="24sp"
+                android:layout_height="45sp"
+                android:layout_toStartOf="@id/wisSave"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="10" />
+
+            <TextView
+                android:id="@+id/wisSave"
+                android:layout_width="45sp"
+                android:layout_height="45sp"
+                android:layout_alignParentEnd="true"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="0"
+                android:textSize="30sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorAccent"
+            android:layout_marginHorizontal="30dp"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="45sp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="45sp"
+                android:layout_alignParentStart="true"
+                android:gravity="center"
+                android:text="Charisma"
+                android:padding="5dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/chaMod"
+                android:layout_width="45sp"
+                android:layout_height="45sp"
+                android:layout_toStartOf="@id/chaValue"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="0"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/chaValue"
+                android:layout_width="24sp"
+                android:layout_height="45sp"
+                android:layout_toStartOf="@id/chaSave"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="10" />
+
+            <TextView
+                android:id="@+id/chaSave"
+                android:layout_width="45sp"
+                android:layout_height="45sp"
+                android:layout_alignParentEnd="true"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="0"
+                android:textSize="30sp" />
+        </RelativeLayout>
+    </LinearLayout>
+</FrameLayout>

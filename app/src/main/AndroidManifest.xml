@@ -13,16 +13,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.ptpthingers.yacs5e_app.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.ptpthingers.yacs5e_app.LoginScreen"
-            android:theme="@style/AppTheme.LoginScreen"/>
+        <activity
+            android:name=".LoginScreen"
+            android:theme="@style/AppTheme.LoginScreen" />
+        <activity
+            android:name=".CharacterSheetActivity"
+            android:label="@string/title_activity_character_sheet"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.ptpthingers.yacs5e_app.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

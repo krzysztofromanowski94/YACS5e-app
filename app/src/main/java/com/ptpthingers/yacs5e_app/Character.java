@@ -1,14 +1,13 @@
 package com.ptpthingers.yacs5e_app;
 
-import java.util.Collection;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 
-class Character {
+class Character implements Serializable {
     private static final int defaultScore = 10;
 
     String charName;
@@ -22,6 +21,8 @@ class Character {
     Map<String, Integer> levels;
     String race;
     List<Feature> traits;
+
+    Boolean favourite;
 
     public String getCharName() {
         return charName;
@@ -167,6 +168,22 @@ class Character {
         this.traits = traits;
     }
 
+    public String getRace() {
+        return race;
+    }
+
+    public void setRace(String race) {
+        this.race = race;
+    }
+
+    public Boolean getFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(Boolean favourite) {
+        this.favourite = favourite;
+    }
+
     public Character() {
         this.charName = "MyCharacter";
 
@@ -185,10 +202,10 @@ class Character {
 
         this.race = "";
         this.levels = new HashMap<>();
+        this.favourite = Boolean.FALSE;
 
         this.shortDesc = "";
         this.traits = new LinkedList<>();
-
     }
 
     public Character(int charFile) {
