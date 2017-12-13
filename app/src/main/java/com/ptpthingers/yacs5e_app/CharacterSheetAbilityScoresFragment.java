@@ -5,75 +5,110 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.google.gson.Gson;
+
+import javax.annotation.Nullable;
 
 
 public class CharacterSheetAbilityScoresFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    public static final String JSON_FILE = "json_file";
 
-//    private OnFragmentInteractionListener mListener;
+    Character mCurrentChar;
+    TextView mStrScore, mStrMod, mStrSave;
+    TextView mDexScore, mDexMod, mDexSave;
+    TextView mConScore, mConMod, mConSave;
+    TextView mIntScore, mIntMod, mIntSave;
+    TextView mWisScore, mWisMod, mWisSave;
+    TextView mChaScore, mChaMod, mChaSave;
 
     public CharacterSheetAbilityScoresFragment() {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
-    public static CharacterSheetAbilityScoresFragment newInstance(String param1, String param2) {
+    public static CharacterSheetAbilityScoresFragment newInstance(String json) {
         CharacterSheetAbilityScoresFragment fragment = new CharacterSheetAbilityScoresFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+        Bundle bundle = new Bundle();
+        bundle.putString(JSON_FILE, json);
+        fragment.setArguments(bundle);
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        Gson gson = new Gson();
+        String json = getArguments().getString(JSON_FILE);
+        mCurrentChar = gson.fromJson(json, Character.class);
+
         return inflater.inflate(R.layout.fragment_character_sheet_ability_scores, container, false);
     }
 
-//    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
-//    }
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        mStrScore = getView().findViewById(R.id.strValue);
+        mStrMod = getView().findViewById(R.id.strMod);
+        mStrSave = getView().findViewById(R.id.strSave);
+        mStrScore.setText(mCurrentChar.getStrScore().getValue().toString());
+        mStrMod.setText(mCurrentChar.getStrScore().getModifier().toString());
+        if (mCurrentChar.getStrSave().getProficient()) {
+            mStrSave.setText(mCurrentChar.getStrScore().getModifier() + mCurrentChar.getProfBonus());
+        } else {
+            mStrSave.setText(mCurrentChar.getStrScore().getModifier().toString());
+        }
+        mDexScore = getView().findViewById(R.id.dexValue);
+        mDexMod = getView().findViewById(R.id.dexMod);
+        mDexSave = getView().findViewById(R.id.dexSave);
+        mDexScore.setText(mCurrentChar.getDexScore().getValue().toString());
+        mDexMod.setText(mCurrentChar.getDexScore().getModifier().toString());
+        if (mCurrentChar.getDexSave().getProficient()) {
+            mDexSave.setText(mCurrentChar.getDexScore().getModifier() + mCurrentChar.getProfBonus());
+        } else {
+            mDexSave.setText(mCurrentChar.getDexScore().getModifier().toString());
+        }
+        mConScore = getView().findViewById(R.id.conValue);
+        mConMod = getView().findViewById(R.id.conMod);
+        mConSave = getView().findViewById(R.id.conSave);
+        mConScore.setText(mCurrentChar.getConScore().getValue().toString());
+        mConMod.setText(mCurrentChar.getConScore().getModifier().toString());
+        if (mCurrentChar.getConSave().getProficient()) {
+            mConSave.setText(mCurrentChar.getConScore().getModifier() + mCurrentChar.getProfBonus());
+        } else {
+            mConSave.setText(mCurrentChar.getConScore().getModifier().toString());
+        }
+        mIntScore = getView().findViewById(R.id.intValue);
+        mIntMod = getView().findViewById(R.id.intMod);
+        mIntSave = getView().findViewById(R.id.intSave);
+        mIntScore.setText(mCurrentChar.getIntScore().getValue().toString());
+        mIntMod.setText(mCurrentChar.getIntScore().getModifier().toString());
+        if (mCurrentChar.getIntSave().getProficient()) {
+            mIntSave.setText(mCurrentChar.getIntScore().getModifier() + mCurrentChar.getProfBonus());
+        } else {
+            mIntSave.setText(mCurrentChar.getIntScore().getModifier().toString());
+        }
+        mWisScore = getView().findViewById(R.id.wisValue);
+        mWisMod = getView().findViewById(R.id.wisMod);
+        mWisSave = getView().findViewById(R.id.wisSave);
+        mWisScore.setText(mCurrentChar.getWisScore().getValue().toString());
+        mWisMod.setText(mCurrentChar.getWisScore().getModifier().toString());
+        if (mCurrentChar.getWisSave().getProficient()) {
+            mWisSave.setText(mCurrentChar.getWisScore().getModifier() + mCurrentChar.getProfBonus());
+        } else {
+            mWisSave.setText(mCurrentChar.getWisScore().getModifier().toString());
+        }
+        mChaScore = getView().findViewById(R.id.chaValue);
+        mChaMod = getView().findViewById(R.id.chaMod);
+        mChaSave = getView().findViewById(R.id.chaSave);
+        mChaScore.setText(mCurrentChar.getChaScore().getValue().toString());
+        mChaMod.setText(mCurrentChar.getChaScore().getModifier().toString());
+        if (mCurrentChar.getChaSave().getProficient()) {
+            mChaSave.setText(mCurrentChar.getChaScore().getModifier() + mCurrentChar.getProfBonus());
+        } else {
+            mChaSave.setText(mCurrentChar.getChaScore().getModifier().toString());
+        }
+    }
 
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
-
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        mListener = null;
-//    }
-//
-//    public interface OnFragmentInteractionListener {
-//        // TODO: Update argument type and name
-//        void onFragmentInteraction(Uri uri);
-//    }
 }

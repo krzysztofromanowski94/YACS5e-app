@@ -18,7 +18,7 @@
 
             <TextView
                 android:id="@+id/modDesc"
-                android:layout_width="45sp"
+                android:layout_width="@dimen/ability_score_view_height"
                 android:layout_height="wrap_content"
                 android:layout_toStartOf="@id/valueDesc"
                 android:gravity="center"
@@ -36,7 +36,7 @@
 
             <TextView
                 android:id="@+id/saveDesc"
-                android:layout_width="45sp"
+                android:layout_width="@dimen/ability_score_view_height"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:gravity="center"
@@ -47,12 +47,12 @@
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="45sp"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="45sp"
+                android:layout_height="@dimen/ability_score_view_height"
                 android:layout_alignParentStart="true"
                 android:gravity="center"
                 android:text="Strength"
@@ -61,8 +61,8 @@
 
             <TextView
                 android:id="@+id/strMod"
-                android:layout_width="45sp"
-                android:layout_height="45sp"
+                android:layout_width="@dimen/ability_score_view_height"
+                android:layout_height="@dimen/ability_score_view_height"
                 android:layout_toStartOf="@id/strValue"
                 android:gravity="center"
                 android:padding="3dp"
@@ -72,7 +72,7 @@
             <TextView
                 android:id="@+id/strValue"
                 android:layout_width="24sp"
-                android:layout_height="45sp"
+                android:layout_height="@dimen/ability_score_view_height"
                 android:layout_toStartOf="@id/strSave"
                 android:gravity="center"
                 android:padding="3dp"
@@ -80,8 +80,8 @@
 
             <TextView
                 android:id="@+id/strSave"
-                android:layout_width="45sp"
-                android:layout_height="45sp"
+                android:layout_width="@dimen/ability_score_view_height"
+                android:layout_height="@dimen/ability_score_view_height"
                 android:layout_alignParentEnd="true"
                 android:gravity="center"
                 android:padding="3dp"
@@ -93,16 +93,18 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/colorAccent"
-            android:layout_marginHorizontal="30dp"
+            android:layout_marginStart="@dimen/ability_score_separator_margin"
+            android:layout_marginEnd="@dimen/ability_score_separator_margin"
             />
 
         <RelativeLayout
+
             android:layout_width="match_parent"
-            android:layout_height="45sp">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="45sp"
+                android:layout_height="@dimen/ability_score_view_height"
                 android:layout_alignParentStart="true"
                 android:gravity="center"
                 android:text="Dexterity"
@@ -111,8 +113,8 @@
 
             <TextView
                 android:id="@+id/dexMod"
-                android:layout_width="45sp"
-                android:layout_height="45sp"
+                android:layout_width="@dimen/ability_score_view_height"
+                android:layout_height="@dimen/ability_score_view_height"
                 android:layout_toStartOf="@id/dexValue"
                 android:gravity="center"
                 android:padding="3dp"
@@ -122,7 +124,7 @@
             <TextView
                 android:id="@+id/dexValue"
                 android:layout_width="24sp"
-                android:layout_height="45sp"
+                android:layout_height="@dimen/ability_score_view_height"
                 android:layout_toStartOf="@id/dexSave"
                 android:gravity="center"
                 android:padding="3dp"
@@ -130,8 +132,8 @@
 
             <TextView
                 android:id="@+id/dexSave"
-                android:layout_width="45sp"
-                android:layout_height="45sp"
+                android:layout_width="@dimen/ability_score_view_height"
+                android:layout_height="@dimen/ability_score_view_height"
                 android:layout_alignParentEnd="true"
                 android:gravity="center"
                 android:padding="3dp"
@@ -143,16 +145,17 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/colorAccent"
-            android:layout_marginHorizontal="30dp"
+            android:layout_marginStart="@dimen/ability_score_separator_margin"
+            android:layout_marginEnd="@dimen/ability_score_separator_margin"     
             />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="45sp">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="45sp"
+                android:layout_height="@dimen/ability_score_view_height"
                 android:layout_alignParentStart="true"
                 android:gravity="center"
                 android:text="Constitution"
@@ -161,8 +164,8 @@
 
             <TextView
                 android:id="@+id/conMod"
-                android:layout_width="45sp"
-                android:layout_height="45sp"
+                android:layout_width="@dimen/ability_score_view_height"
+                android:layout_height="@dimen/ability_score_view_height"
                 android:layout_toStartOf="@id/conValue"
                 android:gravity="center"
                 android:padding="3dp"
@@ -172,7 +175,7 @@
             <TextView
                 android:id="@+id/conValue"
                 android:layout_width="24sp"
-                android:layout_height="45sp"
+                android:layout_height="@dimen/ability_score_view_height"
                 android:layout_toStartOf="@id/conSave"
                 android:gravity="center"
                 android:padding="3dp"
@@ -180,8 +183,8 @@
 
             <TextView
                 android:id="@+id/conSave"
-                android:layout_width="45sp"
-                android:layout_height="45sp"
+                android:layout_width="@dimen/ability_score_view_height"
+                android:layout_height="@dimen/ability_score_view_height"
                 android:layout_alignParentEnd="true"
                 android:gravity="center"
                 android:padding="3dp"
@@ -193,16 +196,17 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/colorAccent"
-            android:layout_marginHorizontal="30dp"
+            android:layout_marginStart="@dimen/ability_score_separator_margin"
+            android:layout_marginEnd="@dimen/ability_score_separator_margin"
             />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="45sp">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="45sp"
+                android:layout_height="@dimen/ability_score_view_height"
                 android:layout_alignParentStart="true"
                 android:gravity="center"
                 android:text="Intelligence"
@@ -211,8 +215,8 @@
 
             <TextView
                 android:id="@+id/intMod"
-                android:layout_width="45sp"
-                android:layout_height="45sp"
+                android:layout_width="@dimen/ability_score_view_height"
+                android:layout_height="@dimen/ability_score_view_height"
                 android:layout_toStartOf="@id/intValue"
                 android:gravity="center"
                 android:padding="3dp"
@@ -222,7 +226,7 @@
             <TextView
                 android:id="@+id/intValue"
                 android:layout_width="24sp"
-                android:layout_height="45sp"
+                android:layout_height="@dimen/ability_score_view_height"
                 android:layout_toStartOf="@id/intSave"
                 android:gravity="center"
                 android:padding="3dp"
@@ -230,8 +234,8 @@
 
             <TextView
                 android:id="@+id/intSave"
-                android:layout_width="45sp"
-                android:layout_height="45sp"
+                android:layout_width="@dimen/ability_score_view_height"
+                android:layout_height="@dimen/ability_score_view_height"
                 android:layout_alignParentEnd="true"
                 android:gravity="center"
                 android:padding="3dp"
@@ -243,16 +247,17 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/colorAccent"
-            android:layout_marginHorizontal="30dp"
+            android:layout_marginStart="@dimen/ability_score_separator_margin"
+            android:layout_marginEnd="@dimen/ability_score_separator_margin"
             />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="45sp">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="45sp"
+                android:layout_height="@dimen/ability_score_view_height"
                 android:layout_alignParentStart="true"
                 android:gravity="center"
                 android:text="Wisdom"
@@ -261,8 +266,8 @@
 
             <TextView
                 android:id="@+id/wisMod"
-                android:layout_width="45sp"
-                android:layout_height="45sp"
+                android:layout_width="@dimen/ability_score_view_height"
+                android:layout_height="@dimen/ability_score_view_height"
                 android:layout_toStartOf="@id/wisValue"
                 android:gravity="center"
                 android:padding="3dp"
@@ -272,7 +277,7 @@
             <TextView
                 android:id="@+id/wisValue"
                 android:layout_width="24sp"
-                android:layout_height="45sp"
+                android:layout_height="@dimen/ability_score_view_height"
                 android:layout_toStartOf="@id/wisSave"
                 android:gravity="center"
                 android:padding="3dp"
@@ -280,8 +285,8 @@
 
             <TextView
                 android:id="@+id/wisSave"
-                android:layout_width="45sp"
-                android:layout_height="45sp"
+                android:layout_width="@dimen/ability_score_view_height"
+                android:layout_height="@dimen/ability_score_view_height"
                 android:layout_alignParentEnd="true"
                 android:gravity="center"
                 android:padding="3dp"
@@ -293,16 +298,17 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/colorAccent"
-            android:layout_marginHorizontal="30dp"
+            android:layout_marginStart="@dimen/ability_score_separator_margin"
+            android:layout_marginEnd="@dimen/ability_score_separator_margin"
             />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="45sp">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="45sp"
+                android:layout_height="@dimen/ability_score_view_height"
                 android:layout_alignParentStart="true"
                 android:gravity="center"
                 android:text="Charisma"
@@ -311,8 +317,8 @@
 
             <TextView
                 android:id="@+id/chaMod"
-                android:layout_width="45sp"
-                android:layout_height="45sp"
+                android:layout_width="@dimen/ability_score_view_height"
+                android:layout_height="@dimen/ability_score_view_height"
                 android:layout_toStartOf="@id/chaValue"
                 android:gravity="center"
                 android:padding="3dp"
@@ -322,7 +328,7 @@
             <TextView
                 android:id="@+id/chaValue"
                 android:layout_width="24sp"
-                android:layout_height="45sp"
+                android:layout_height="@dimen/ability_score_view_height"
                 android:layout_toStartOf="@id/chaSave"
                 android:gravity="center"
                 android:padding="3dp"
@@ -330,8 +336,8 @@
 
             <TextView
                 android:id="@+id/chaSave"
-                android:layout_width="45sp"
-                android:layout_height="45sp"
+                android:layout_width="@dimen/ability_score_view_height"
+                android:layout_height="@dimen/ability_score_view_height"
                 android:layout_alignParentEnd="true"
                 android:gravity="center"
                 android:padding="3dp"

@@ -15,8 +15,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class CharacterSheetActivity extends AppCompatActivity {
+
+    public static final String JSON_FILE = "json_file";
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
@@ -27,7 +30,7 @@ public class CharacterSheetActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         Gson gson = new Gson();
-        String charStr = getIntent().getStringExtra("CHARACTER");
+        String charStr = getIntent().getStringExtra(JSON_FILE);
         thisChar = gson.fromJson(charStr, Character.class);
         setContentView(R.layout.activity_character_sheet);
 
@@ -100,10 +103,21 @@ public class CharacterSheetActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            if (position == 0) {
-                return new CharacterSheetAbilityScoresFragment();
-            } else {
-                return PlaceholderFragment.newInstance(position + 1);
+            GsonBuilder builder = new GsonBuilder();
+            Gson gson = builder.create();
+            Bundle bundle = new Bundle();
+            bundle.putString(JSON_FILE, gson.toJson(thisChar));
+            switch (position) {
+                case 0:
+                    CharacterSheetAbilityScoresFragment fr0 = new CharacterSheetAbilityScoresFragment();
+                    fr0.setArguments(bundle);
+                    return fr0;
+                case 1:
+                    CharacterSheetSkillsFragment fr1 = new CharacterSheetSkillsFragment();
+                    fr1.setArguments(bundle);
+                    return fr1;
+                default:
+                    return PlaceholderFragment.newInstance(position + 1);
             }
         }
 

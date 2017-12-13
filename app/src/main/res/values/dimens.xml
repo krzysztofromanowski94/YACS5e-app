@@ -5,10 +5,16 @@
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-
+    <dimen name="char_sheet_icon_size">48dp</dimen>
+    <dimen name="small_card_radius">10dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
+    <dimen name="char_sheet_tab">48dp</dimen>
+    <dimen name="ability_score_separator_margin">30dp</dimen>
+    <dimen name="skill_separator_margin">10dp</dimen>
 
     <!--Text values-->
     <dimen name="card_title">15sp</dimen>
     <dimen name="card_sub">12sp</dimen>
-    <dimen name="appbar_padding_top">8dp</dimen>
+    <dimen name="char_sheet_tab_text">18sp</dimen>
+    <dimen name="ability_score_view_height">45sp</dimen>
 </resources>
