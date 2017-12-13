@@ -1,11 +1,11 @@
 package com.ptpthingers.yacs5e_app;
 
 class AbilityScore {
-    Integer value;
-    Integer modifier;
-    Integer tempValue;
-    Integer tempModifier;
-    Boolean useTemp;
+    private Integer value;
+    private Integer modifier;
+    private Integer tempValue;
+    private Integer tempModifier;
+    private Boolean useTemp;
 
     public AbilityScore(Integer value) {
         setValue(value);

@@ -4,56 +4,63 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 
 class Character implements Serializable {
-    private static final int defaultScore = 10;
+    private static final int defaultScore = 14;
 
-    String charName;
-    String shortDesc;
-    Integer portrait;
-    Integer profBonus;
+    private String mCharName;
+    private String mShortDesc;
+    private Integer mPortrait;
+    private Integer mProfBonus;
 
-    AbilityScore strScore, dexScore, conScore, intScore, wisScore, chaScore;
-    SavingThrow strSave, dexSave, conSave, intSave, wisSave, chaSave;
+    private Integer mHealth;
+    private Integer mArmorClass;
+    private Integer mSpeed;
+    private Integer mInitiative;
+    private HashMap<String, Integer> mHitDice;
+    private List<Attack> mAttacks;
+    
 
-    Map<String, Integer> levels;
-    String race;
-    List<Feature> traits;
+    private AbilityScore strScore, dexScore, conScore, intScore, wisScore, chaScore;
+    private SavingThrow strSave, dexSave, conSave, intSave, wisSave, chaSave;
+    private HashMap<String, Proficiency> skills;
 
-    Boolean favourite;
+    private HashMap<String, Integer> levels;
+    private String race;
+    private List<Feature> traits;
+
 
     public String getCharName() {
-        return charName;
+        return mCharName;
     }
 
     public void setCharName(String charName) {
-        this.charName = charName;
+        this.mCharName = charName;
     }
 
     public String getShortDesc() {
-        return shortDesc;
+        return mShortDesc;
     }
 
     public void setShortDesc(String shortDesc) {
-        this.shortDesc = shortDesc;
+        this.mShortDesc = shortDesc;
     }
 
     public Integer getPortrait() {
-        return portrait;
+        return mPortrait;
     }
 
     public void setPortrait(Integer portrait) {
-        this.portrait = portrait;
+        this.mPortrait = portrait;
     }
 
     public Integer getProfBonus() {
-        return profBonus;
+        return mProfBonus;
     }
 
     public void setProfBonus(Integer profBonus) {
-        this.profBonus = profBonus;
+        this.mProfBonus = profBonus;
     }
 
     public AbilityScore getStrScore() {
@@ -152,14 +159,6 @@ class Character implements Serializable {
         this.chaSave = chaSave;
     }
 
-    public Map getLevels() {
-        return levels;
-    }
-
-    public void setLevels(Map levels) {
-        this.levels = levels;
-    }
-
     public List<Feature> getTraits() {
         return traits;
     }
@@ -176,16 +175,24 @@ class Character implements Serializable {
         this.race = race;
     }
 
-    public Boolean getFavourite() {
-        return favourite;
+    public HashMap<String, Proficiency> getSkills() {
+        return skills;
     }
 
-    public void setFavourite(Boolean favourite) {
-        this.favourite = favourite;
+    public void setSkills(HashMap<String, Proficiency> skills) {
+        this.skills = skills;
+    }
+
+    public HashMap<String, Integer> getLevels() {
+        return levels;
+    }
+
+    public void setLevels(HashMap<String, Integer> levels) {
+        this.levels = levels;
     }
 
     public Character() {
-        this.charName = "MyCharacter";
+        this.mCharName = "MyCharacter";
 
         this.strScore = new AbilityScore(defaultScore);
         this.dexScore = new AbilityScore(defaultScore);
@@ -202,9 +209,12 @@ class Character implements Serializable {
 
         this.race = "";
         this.levels = new HashMap<>();
-        this.favourite = Boolean.FALSE;
+        this.skills = new HashMap<>();
+        skills.put("Acrobatics", Proficiency.DOUBLE);
+        this.mHitDice = new HashMap<>();
+        this.mProfBonus = 2;
 
-        this.shortDesc = "";
+        this.mShortDesc = "";
         this.traits = new LinkedList<>();
     }
 
