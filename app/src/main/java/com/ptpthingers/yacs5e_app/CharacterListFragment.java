@@ -3,6 +3,7 @@ package com.ptpthingers.yacs5e_app;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.ptpthingers.synchronization.DBWrapper;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -30,6 +33,15 @@ public class CharacterListFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mCharacterList = new LinkedList<Character>();
+        for (String uuid : DBWrapper.getUuidList()) {
+            mCharacterList.add(new Character(uuid));
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_character_list, container, false);
@@ -40,8 +52,6 @@ public class CharacterListFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mCharacterList = new LinkedList<Character>();
-
         mAdapter = new CharacterAdapter(mCharacterList);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -49,7 +59,9 @@ public class CharacterListFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mCharacterList.add(new Character());
+                Character newCharacter = new Character();
+                newCharacter.post();
+                mCharacterList.add(newCharacter);
                 mAdapter.notifyItemInserted(mCharacterList.size());
             }
         });
@@ -72,6 +84,7 @@ public class CharacterListFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        mCharacterList = null;
     }
 
     public interface OnFragmentInteractionListener {

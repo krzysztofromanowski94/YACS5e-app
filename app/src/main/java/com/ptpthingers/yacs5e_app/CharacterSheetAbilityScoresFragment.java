@@ -16,7 +16,7 @@ public class CharacterSheetAbilityScoresFragment extends Fragment {
 
     public static final String JSON_FILE = "json_file";
 
-    Character mCurrentChar;
+    private Character mCurrentChar;
     TextView mStrScore, mStrMod, mStrSave;
     TextView mDexScore, mDexMod, mDexSave;
     TextView mConScore, mConMod, mConSave;
