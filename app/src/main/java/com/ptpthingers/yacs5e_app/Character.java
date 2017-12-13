@@ -1,9 +1,13 @@
 package com.ptpthingers.yacs5e_app;
 
+import com.ptpthingers.synchronization.CharacterEntity;
+import com.ptpthingers.synchronization.DBWrapper;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 
 class Character implements Serializable {
@@ -29,6 +33,8 @@ class Character implements Serializable {
     private HashMap<String, Integer> levels;
     private String race;
     private List<Feature> traits;
+
+    private String mUuid;
 
 
     public String getCharName() {
@@ -192,6 +198,31 @@ class Character implements Serializable {
     }
 
     public Character() {
+        initializeCharacter();
+    }
+
+    public String post() {
+        if (mUuid == null) {
+            mUuid = UUID.randomUUID().toString();
+        }
+        DBWrapper.insertCharEntity(new CharacterEntity(mUuid, ""));
+        return mUuid;
+    }
+
+    public Character(String mUuid) {
+        initializeCharacter();
+        this.mUuid = mUuid;
+
+        String blob = DBWrapper.getCharEntity(mUuid).getData();
+    }
+
+    public Character(int charFile) {
+        initializeCharacter();
+        /* TODO: import character file and fill the object with parsed data
+        https://www.androidhive.info/2012/01/android-json-parsing-tutorial/ */
+    }
+
+    private void initializeCharacter() {
         this.mCharName = "MyCharacter";
 
         this.strScore = new AbilityScore(defaultScore);
@@ -216,10 +247,5 @@ class Character implements Serializable {
 
         this.mShortDesc = "";
         this.traits = new LinkedList<>();
-    }
-
-    public Character(int charFile) {
-        /* TODO: import character file and fill the object with parsed data
-        https://www.androidhive.info/2012/01/android-json-parsing-tutorial/ */
     }
 }
