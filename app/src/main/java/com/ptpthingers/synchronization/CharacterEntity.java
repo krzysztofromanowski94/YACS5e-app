@@ -9,8 +9,6 @@ import com.google.protobuf.ByteString;
 import com.ptpthingers.yacs5e_app.TCharacter;
 import com.ptpthingers.yacs5e_app.TTalk;
 
-import java.util.UUID;
-
 
 @Entity(tableName = "characters")
 public class CharacterEntity {
@@ -27,10 +25,9 @@ public class CharacterEntity {
     @ColumnInfo(name = "data")
     private String data;
 
-    public CharacterEntity(String data) {
-        super();
+    public CharacterEntity(@NonNull String uuid, String data) {
         this.data = data;
-        uuid = UUID.randomUUID().toString();
+        this.uuid = uuid;
         lastMod = System.currentTimeMillis() / 1000L;
     }
 
@@ -38,15 +35,15 @@ public class CharacterEntity {
         return uuid;
     }
 
-    public void setUuid(String uuid) {
+    void setUuid(String uuid) {
         this.uuid = uuid;
     }
 
-    public long getLastSync() {
+    long getLastSync() {
         return lastSync;
     }
 
-    public void setLastSync(long lastSync) {
+    void setLastSync(long lastSync) {
         this.lastSync = lastSync;
     }
 
@@ -54,7 +51,7 @@ public class CharacterEntity {
         return lastMod;
     }
 
-    public void setLastMod(long lastMod) {
+    void setLastMod(long lastMod) {
         this.lastMod = lastMod;
     }
 
@@ -78,7 +75,7 @@ public class CharacterEntity {
         return ByteString.copyFromUtf8(data);
     }
 
-    public TTalk toSyncTTalk() {
+    TTalk toSyncTTalk() {
         lastSync = System.currentTimeMillis() / 1000L;
         return TTalk.newBuilder()
                 .setCharacter(TCharacter.newBuilder()

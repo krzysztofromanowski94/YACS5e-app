@@ -97,8 +97,6 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
         }
         // User is logged in
 
-        db = DBInstance.getHook(context);
-
         // send characters one-by-one
         // 0. even - receive even timestamp from server
         // 1 - newer on client - this.last_sync == server.last_sync && this.last_mod > this.last_sync - that's fine, just update
@@ -125,9 +123,7 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
             }
 
             // check if local data needs to be updated
-
             Long syncDifference = characterEntity.getLastSync() - received.getCharacter().getLastSync();
-            Log.i(TAG, "Current character syncDifference: " + syncDifference);
 
             // 0. even - receive even timestamp from server
             if (syncDifference == 0 && characterEntity.getLastMod() == received.getCharacter().getLastMod()) {
@@ -159,10 +155,9 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
                 }
 
                 TCharacter responseChar = received.getCharacter();
-                CharacterEntity charFromServer = new CharacterEntity(responseChar.getBlob().toString());
+                CharacterEntity charFromServer = new CharacterEntity(responseChar.getUuid(), responseChar.getBlob().toString());
                 charFromServer.setLastSync(responseChar.getLastSync());
                 charFromServer.setLastMod(responseChar.getLastMod());
-                charFromServer.setUuid(responseChar.getUuid());
 
                 db.characterDao().insertCharacter(charFromServer);
 
@@ -171,7 +166,7 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
 
             // 3 - different on client - this.last_sync != server.last_sync && this.last_mod > this.last_sync - generate new uuid, send as new character,
             // sync old character
-            else if (received.getCharacter().getUuid() != "" && syncDifference != 0 && characterEntity.getLastMod() >= characterEntity.getLastSync()) {
+            else if (!received.getCharacter().getUuid().equals("") && syncDifference != 0 && characterEntity.getLastMod() >= characterEntity.getLastSync()) {
                 Log.i(TAG, "3 - different on client this char " + characterEntity.toString());
 
                 // first get server data for this uuid
@@ -223,7 +218,7 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
             }
 
             // 4 - not on server - receive empty uuid, send complete character
-            else if (received.getCharacter().getUuid() == "") {
+            else if (received.getCharacter().getUuid().equals("")) {
                 Log.i(TAG, "Character not on server (4) uuid: " + characterEntity.getUuid());
                 requestStream.onNext(characterEntity.toSyncTTalk());
                 db.characterDao().insertCharacter(characterEntity);
@@ -258,7 +253,7 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
 
             switch (charReceived.getUnionCase()) {
                 case CHARACTER:
-                    CharacterEntity characterEntity = new CharacterEntity(charReceived.getCharacter().getBlob().toString());
+                    CharacterEntity characterEntity = new CharacterEntity(charReceived.getCharacter().getUuid(), charReceived.getCharacter().getBlob().toString());
                     characterEntity.setUuid(charReceived.getCharacter().getUuid());
                     characterEntity.setLastSync(charReceived.getCharacter().getLastSync());
                     characterEntity.setLastMod(charReceived.getCharacter().getLastMod());
@@ -318,7 +313,8 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
         username = accountSharedPreferences.getString("username", "");
         password = accountSharedPreferences.getString("password", "");
 
-        messageQueue = new ArrayBlockingQueue<TTalk>(128);
+        messageQueue = new ArrayBlockingQueue<>(128);
+        db = DBInstance.getHook();
     }
 }
 
