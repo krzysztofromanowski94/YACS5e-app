@@ -11,22 +11,17 @@ import android.content.SyncResult;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.google.protobuf.ByteString;
 import com.ptpthingers.yacs5e_app.TCharacter;
 import com.ptpthingers.yacs5e_app.TTalk;
 import com.ptpthingers.yacs5e_app.TUser;
 import com.ptpthingers.yacs5e_app.YACS5eGrpc;
 
+import java.util.UUID;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import io.grpc.ManagedChannel;
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
-
-/*
-* This file is about to be changed. Current state is for testing only.
-* Tutorial used: https://github.com/codepath/android_guides/wiki/Server-Synchronization-(SyncAdapter)
-*/
 
 
 public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
@@ -43,6 +38,7 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
 
     private ArrayBlockingQueue<TTalk> messageQueue;
     private TTalk received;
+    private CharacterDatabase db;
 
 
     GrpcSyncAdapter(Context context, boolean autoInitialize) {
@@ -86,7 +82,7 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
             e.printStackTrace();
         }
 
-        if ( received == null ) {
+        if (received == null) {
             Log.i(TAG, "received is null. Something is very wrong :(");
             return;
         }
@@ -101,58 +97,24 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
         }
         // User is logged in
 
-        // example character list
-        TCharacter[] characterList = new TCharacter[10];
-
-        // 0. even - receive even timestamp from server
-        // 1 - newer on client - this.last_sync == server.last_sync && this.last_mod > this.last_sync - that's fine, just update
-        // 2 - newer on server - this.last_sync < server.last_sync && last_mod <= last_sync - that's fine, just update
-        // 3 - different on client - this.last_sync != server.last_sync && this.last_mod > this.last_sync - generate new uuid, send as new character
-        // 4 - not on server - receive timestamp == 0, send complete character
-        // 5 - to be deleted - set Character.Delete=true, send to server
-        // <6> - not on client - if server have more characters it will send them one-by-one until TTalk.Good=true
-
-        characterList[0] = TCharacter.newBuilder()
-                .setBlob(ByteString.copyFromUtf8(""))
-                .setLastSync(1512954399)
-                .setUuid("1234567891234567").build();
-
-        characterList[1] = TCharacter.newBuilder()
-                .setBlob(ByteString.copyFromUtf8(""))
-                .setLastSync(1512954576)
-                .setLastMod(1512954580)
-                .setUuid("1234567891234568").build();
-
-        characterList[2] = TCharacter.newBuilder()
-                .setBlob(ByteString.copyFromUtf8(""))
-                .setLastSync(1513023228)
-                .setUuid("1234567891234569").build();
-
-        characterList[3] = TCharacter.newBuilder()
-                .setBlob(ByteString.copyFromUtf8(""))
-                .setLastSync(1513023230)
-                .setUuid("1234567891234577").build();
-
-        characterList[4] = TCharacter.newBuilder()
-                .setBlob(ByteString.copyFromUtf8(""))
-                .setLastSync(1513023230)
-                .setUuid("1234567891234577").build();
+        db = DBInstance.getHook(context);
 
         // send characters one-by-one
         // 0. even - receive even timestamp from server
         // 1 - newer on client - this.last_sync == server.last_sync && this.last_mod > this.last_sync - that's fine, just update
         // 2 - newer on server && last_mod <= last_sync - that's fine, just update
         // 3 - different on client - this.last_sync != server.last_sync && this.last_mod > this.last_sync - generate new uuid, send as new character
-        // 4 - not on server - receive timestamp == 0, send complete character
+        // 4 - not on server - receive empty uuid, send complete character
         // 5 - to be deleted - set Character.Delete=true, send to server
         // <6> - not on client - if server have more characters it will send them one-by-one until TTalk.Good=true
-        for (TCharacter tCharacter : characterList) {
+        for (CharacterEntity characterEntity : db.characterDao().getAllCharacters()) {
             // send message about this character
             requestStream.onNext(
                     TTalk.newBuilder()
                             .setCharacter(TCharacter.newBuilder()
-                                    .setLastSync(tCharacter.getLastSync())
-                                    .setUuid(tCharacter.getUuid()))
+                                    .setUuid(characterEntity.getUuid())
+                                    .setLastSync(characterEntity.getLastSync())
+                                    .setLastMod(characterEntity.getLastMod()))
                             .build());
 
             //receive server parsed character
@@ -164,53 +126,163 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
 
             // check if local data needs to be updated
 
-            Long syncDifference = tCharacter.getLastSync() - received.getCharacter().getLastSync();
-            Long modDifference = tCharacter.getLastMod() - received.getCharacter().getLastMod();
-            Log.i(TAG, "Current character syncDifference: " + syncDifference + " & modDifference: " + modDifference);
+            Long syncDifference = characterEntity.getLastSync() - received.getCharacter().getLastSync();
+            Log.i(TAG, "Current character syncDifference: " + syncDifference);
 
             // 0. even - receive even timestamp from server
-            if (syncDifference == 0) {
-                Log.i(TAG, "Character is even (0) uuid: " + received.getCharacter().getUuid());
+            if (syncDifference == 0 && characterEntity.getLastMod() == received.getCharacter().getLastMod()) {
+                Log.i(TAG, "0 - character is even uuid: " + characterEntity.getUuid());
             }
 
             // 1 - newer on client - this.last_sync == server.last_sync && this.last_mod > this.last_sync - that's fine, just update
-            else if (syncDifference == 0 && modDifference > 0) {
-                Log.i(TAG, "Character is newer on client (1) uuid: " + received.getCharacter().getUuid());
-                // ToDo: generate proper uuid
-                String uuid = "111";
-                TCharacter newerCharacter = TCharacter.newBuilder()
-                        .setUuid(uuid)
-                        .setLastSync(System.currentTimeMillis() / 1000L)
-                        .setBlob(tCharacter.getBlob())
-                        .build();
-                requestStream.onNext(TTalk.newBuilder().setCharacter(newerCharacter).build());
+            else if (syncDifference == 0 && characterEntity.getLastMod() > characterEntity.getLastSync()) {
+                Log.i(TAG, "1 - newer on client uuid: " + characterEntity.getUuid());
+                requestStream.onNext(characterEntity.toSyncTTalk());
+                db.characterDao().insertCharacter(characterEntity);
             }
 
-            // 2 - newer on server - receive complete character
-            else if (syncDifference > 0) {
-                Log.i(TAG, "Timestamp newer on server (1) uuid: " + received.getCharacter().getUuid());
-            }
-            // character not on server
-            // 3 - not on server - receive timestamp == 0, send complete character
-            else if (received.getCharacter().getLastSync() == 0) {
-                Log.i(TAG, "Character not on server (0) uuid: " + received.getCharacter().getUuid());
-                TCharacter newCharacter = TCharacter.newBuilder()
-                        .setUuid(tCharacter.getUuid())
-                        .setLastSync(tCharacter.getLastSync())
-                        .setBlob(tCharacter.getBlob())
-                        .build();
-                requestStream.onNext(TTalk.newBuilder().setCharacter(newCharacter).build());
+            // 2 - newer on server && last_mod <= last_sync - that's fine, just update
+            else if (syncDifference < 0 && characterEntity.getLastMod() <= characterEntity.getLastSync()) {
+                Log.i(TAG, "2 - newer on server uuid: " + received.getCharacter().getUuid());
+                requestStream.onNext(TTalk.newBuilder()
+                        .setCharacter(TCharacter.newBuilder()
+                                .setUuid(characterEntity.getUuid())
+                                .setLastMod(0)
+                                .setLastSync(0))
+                        .build());
+
+                //receive server parsed character
+                try {
+                    received = messageQueue.take();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                TCharacter responseChar = received.getCharacter();
+                CharacterEntity charFromServer = new CharacterEntity(responseChar.getBlob().toString());
+                charFromServer.setLastSync(responseChar.getLastSync());
+                charFromServer.setLastMod(responseChar.getLastMod());
+                charFromServer.setUuid(responseChar.getUuid());
+
+                db.characterDao().insertCharacter(charFromServer);
+
+                Log.i(TAG, db.characterDao().getCharacter(characterEntity.getUuid()).toString());
             }
 
+            // 3 - different on client - this.last_sync != server.last_sync && this.last_mod > this.last_sync - generate new uuid, send as new character,
+            // sync old character
+            else if (received.getCharacter().getUuid() != "" && syncDifference != 0 && characterEntity.getLastMod() >= characterEntity.getLastSync()) {
+                Log.i(TAG, "3 - different on client this char " + characterEntity.toString());
+
+                // first get server data for this uuid
+                requestStream.onNext(TTalk.newBuilder()
+                        .setCharacter(TCharacter.newBuilder()
+                                .setUuid(characterEntity.getUuid())
+                                .setLastMod(0)
+                                .setLastSync(0))
+                        .build());
+
+                // server data for this uuid
+                TTalk charOnServer = TTalk.newBuilder().build();
+                try {
+                    charOnServer = messageQueue.take();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                // reuse this variable; set new uuid so server will put this into db
+                characterEntity.setUuid(UUID.randomUUID().toString());
+
+                // perform all sync steps for new character
+                requestStream.onNext(
+                        TTalk.newBuilder()
+                                .setCharacter(TCharacter.newBuilder()
+                                        .setUuid(characterEntity.getUuid())
+                                        .setLastSync(characterEntity.getLastSync())
+                                        .setLastMod(characterEntity.getLastMod()))
+                                .build());
+
+                // we know that sever don't know this uuid, so just empty the messageQueue
+                try {
+                    received = messageQueue.take();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                // send complete character to be saved on server
+                requestStream.onNext(characterEntity.toSyncTTalk());
+                db.characterDao().insertCharacter(characterEntity);
+
+                // update character
+                characterEntity.setUuid(charOnServer.getCharacter().getUuid());
+                characterEntity.setLastSync(charOnServer.getCharacter().getLastSync());
+                characterEntity.setLastMod(charOnServer.getCharacter().getLastMod());
+                characterEntity.setData(charOnServer.getCharacter().getBlob().toString());
+
+                db.characterDao().insertCharacter(characterEntity);
+            }
+
+            // 4 - not on server - receive empty uuid, send complete character
+            else if (received.getCharacter().getUuid() == "") {
+                Log.i(TAG, "Character not on server (4) uuid: " + characterEntity.getUuid());
+                requestStream.onNext(characterEntity.toSyncTTalk());
+                db.characterDao().insertCharacter(characterEntity);
+            } else {
+                Log.i(TAG, "Unknown scenario");
+                Log.i(TAG, characterEntity.toString());
+                Log.i(TAG, received.toString());
+            }
         }
 
+        // inform server that there are no more characters on local db
         requestStream.onNext(TTalk.newBuilder().setGood(true).build());
+
+        // server indicates that there are characters to sync by sending TTalk.Good=true;
+        // <6> - not on client - if server have more characters it will send them one-by-one until TTalk.Good=true
+        boolean receiveNew = false;
+        try {
+            if (messageQueue.take().getGood()) {
+                receiveNew = true;
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        while (receiveNew) {
+            TTalk charReceived = TTalk.newBuilder().build();
+            try {
+                charReceived = messageQueue.take();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            switch (charReceived.getUnionCase()) {
+                case CHARACTER:
+                    CharacterEntity characterEntity = new CharacterEntity(charReceived.getCharacter().getBlob().toString());
+                    characterEntity.setUuid(charReceived.getCharacter().getUuid());
+                    characterEntity.setLastSync(charReceived.getCharacter().getLastSync());
+                    characterEntity.setLastMod(charReceived.getCharacter().getLastMod());
+
+                    Log.i(TAG, "To be added to local db:");
+                    Log.i(TAG, characterEntity.toString());
+                    db.characterDao().insertCharacter(characterEntity);
+                    break;
+
+                case GOOD:
+                    Log.i(TAG, "No more characters");
+                    receiveNew = false;
+                    break;
+
+                default:
+                    Log.i(TAG, "TTalk receive error. Not predicted type: " + charReceived.getUnionCase().name());
+            }
+        }
 
         Log.i(TAG, "Finished synchronization!");
     }
 
 
-    private StreamObserver<TTalk> CreateRequestStreamObserver(){
+    private StreamObserver<TTalk> CreateRequestStreamObserver() {
         return new StreamObserver<TTalk>() {
             @Override
             public void onNext(TTalk value) {
@@ -226,18 +298,16 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
             public void onError(Throwable t) {
                 Status status = Status.fromThrowable(t);
                 Log.i(TAG, "onError: " + status.toString());
-
             }
 
             @Override
             public void onCompleted() {
                 Log.i(TAG, "Completed");
-
             }
         };
     }
 
-    private void initializeSyncAdapted(Context context){
+    private void initializeSyncAdapted(Context context) {
         this.context = context;
 
         connectionSharedPreferences = context.getSharedPreferences("connection", Context.MODE_PRIVATE);
