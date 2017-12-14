@@ -8,16 +8,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.ptpthingers.synchronization.DBWrapper;
 
 import javax.annotation.Nullable;
 
 
 public class CharacterSheetAbilityScoresFragment extends Fragment {
 
-    public static final String JSON_FILE = "json_file";
+    public static final String CHAR_UUID = "character_uuid";
 
     private Character mCurrentChar;
-    TextView mStrScore, mStrMod, mStrSave;
+    private TextView mStrScore, mStrMod, mStrSave;
     TextView mDexScore, mDexMod, mDexSave;
     TextView mConScore, mConMod, mConSave;
     TextView mIntScore, mIntMod, mIntSave;
@@ -28,11 +29,11 @@ public class CharacterSheetAbilityScoresFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static CharacterSheetAbilityScoresFragment newInstance(String json) {
+    public static CharacterSheetAbilityScoresFragment newInstance(String uuid) {
         CharacterSheetAbilityScoresFragment fragment = new CharacterSheetAbilityScoresFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString(JSON_FILE, json);
-        fragment.setArguments(bundle);
+        Bundle args = new Bundle();
+        args.putString(CHAR_UUID, uuid);
+        fragment.setArguments(args);
 
         return fragment;
     }
@@ -40,9 +41,8 @@ public class CharacterSheetAbilityScoresFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Gson gson = new Gson();
-        String json = getArguments().getString(JSON_FILE);
-        mCurrentChar = gson.fromJson(json, Character.class);
+        String uuid = getArguments().getString(CHAR_UUID);
+        mCurrentChar = new Gson().fromJson(DBWrapper.getCharEntity(uuid).getData(), Character.class);
 
         return inflater.inflate(R.layout.fragment_character_sheet_ability_scores, container, false);
     }

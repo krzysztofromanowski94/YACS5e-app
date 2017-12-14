@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, CharacterListFragment.OnFragmentInteractionListener,
         CampaignList.OnFragmentInteractionListener {
 
-    public static final String JSON_FILE = "json_file";
+    public static final String CHAR_UUID = "character_uuid";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

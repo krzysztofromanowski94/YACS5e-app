@@ -1,9 +1,12 @@
 package com.ptpthingers.yacs5e_app;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.ptpthingers.synchronization.CharacterEntity;
 import com.ptpthingers.synchronization.DBWrapper;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,7 +27,7 @@ class Character implements Serializable {
     private Integer mInitiative;
     private HashMap<String, Integer> mHitDice;
     private List<Attack> mAttacks;
-    
+
 
     private AbilityScore strScore, dexScore, conScore, intScore, wisScore, chaScore;
     private SavingThrow strSave, dexSave, conSave, intSave, wisSave, chaSave;
@@ -33,9 +36,24 @@ class Character implements Serializable {
     private HashMap<String, Integer> levels;
     private String race;
     private List<Feature> traits;
-
     private String mUuid;
 
+    public Character() {
+        initializeCharacter();
+    }
+
+
+    public Character(String mUuid) {
+        initializeCharacter();
+        this.mUuid = mUuid;
+
+        String blob = DBWrapper.getCharEntity(mUuid).getData();
+        initializeCharacter(blob);
+    }
+
+    public String getmUuid() {
+        return mUuid;
+    }
 
     public String getCharName() {
         return mCharName;
@@ -197,29 +215,68 @@ class Character implements Serializable {
         this.levels = levels;
     }
 
-    public Character() {
-        initializeCharacter();
+    public Integer getmProfBonus() {
+        return mProfBonus;
+    }
+
+    public void setmProfBonus(Integer mProfBonus) {
+        this.mProfBonus = mProfBonus;
+    }
+
+    public Integer getmHealth() {
+        return mHealth;
+    }
+
+    public void setmHealth(Integer mHealth) {
+        this.mHealth = mHealth;
+    }
+
+    public Integer getmArmorClass() {
+        return mArmorClass;
+    }
+
+    public void setmArmorClass(Integer mArmorClass) {
+        this.mArmorClass = mArmorClass;
+    }
+
+    public Integer getmSpeed() {
+        return mSpeed;
+    }
+
+    public void setmSpeed(Integer mSpeed) {
+        this.mSpeed = mSpeed;
+    }
+
+    public Integer getmInitiative() {
+        return mInitiative;
+    }
+
+    public void setmInitiative(Integer mInitiative) {
+        this.mInitiative = mInitiative;
+    }
+
+    public HashMap<String, Integer> getmHitDice() {
+        return mHitDice;
+    }
+
+    public void setmHitDice(HashMap<String, Integer> mHitDice) {
+        this.mHitDice = mHitDice;
+    }
+
+    public List<Attack> getmAttacks() {
+        return mAttacks;
+    }
+
+    public void setmAttacks(List<Attack> mAttacks) {
+        this.mAttacks = mAttacks;
     }
 
     public String post() {
         if (mUuid == null) {
             mUuid = UUID.randomUUID().toString();
         }
-        DBWrapper.insertCharEntity(new CharacterEntity(mUuid, ""));
+        DBWrapper.insertCharEntity(new CharacterEntity(mUuid, new GsonBuilder().create().toJson(this)));
         return mUuid;
-    }
-
-    public Character(String mUuid) {
-        initializeCharacter();
-        this.mUuid = mUuid;
-
-        String blob = DBWrapper.getCharEntity(mUuid).getData();
-    }
-
-    public Character(int charFile) {
-        initializeCharacter();
-        /* TODO: import character file and fill the object with parsed data
-        https://www.androidhive.info/2012/01/android-json-parsing-tutorial/ */
     }
 
     private void initializeCharacter() {
@@ -238,6 +295,13 @@ class Character implements Serializable {
         this.wisSave = new SavingThrow();
         this.chaSave = new SavingThrow();
 
+        this.mHealth = 0;
+        this.mArmorClass = 0;
+        this.mSpeed = 0;
+        this.mInitiative = 0;
+        this.mHitDice = new HashMap<>();
+        this.mAttacks = new ArrayList<>();
+
         this.race = "";
         this.levels = new HashMap<>();
         this.skills = new HashMap<>();
@@ -247,5 +311,40 @@ class Character implements Serializable {
 
         this.mShortDesc = "";
         this.traits = new LinkedList<>();
+    }
+
+    private void initializeCharacter(String blob) {
+        Character tempChar = new Gson().fromJson(blob, Character.class);
+
+        this.mCharName = tempChar.getCharName();
+
+        this.strScore = tempChar.getStrScore();
+        this.dexScore = tempChar.getDexScore();
+        this.conScore = tempChar.getConScore();
+        this.intScore = tempChar.getIntScore();
+        this.wisScore = tempChar.getWisScore();
+        this.chaScore = tempChar.getChaScore();
+        this.strSave = tempChar.getStrSave();
+        this.dexSave = tempChar.getDexSave();
+        this.conSave = tempChar.getConSave();
+        this.intSave = tempChar.getIntSave();
+        this.wisSave = tempChar.getWisSave();
+        this.chaSave = tempChar.getChaSave();
+
+        this.mHealth = tempChar.getmHealth();
+        this.mArmorClass = tempChar.getmArmorClass();
+        this.mSpeed = tempChar.getmSpeed();
+        this.mInitiative = tempChar.getmInitiative();
+        this.mHitDice = tempChar.getmHitDice();
+        this.mAttacks = tempChar.getmAttacks();
+
+        this.race = tempChar.getRace();
+        this.levels = tempChar.getLevels();
+        this.skills = tempChar.getSkills();
+        this.mHitDice = tempChar.getmHitDice();
+        this.mProfBonus = tempChar.getmProfBonus();
+
+        this.mShortDesc = tempChar.mShortDesc;
+        this.traits = tempChar.getTraits();
     }
 }

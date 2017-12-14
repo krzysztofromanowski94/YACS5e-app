@@ -9,32 +9,28 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.ptpthingers.synchronization.DBWrapper;
+
+import java.util.Locale;
 
 import javax.annotation.Nullable;
 
 
 public class CharacterSheetSkillsFragment extends Fragment {
 
-    private static final String TAG = "SkillsFrag";
-    public static final String JSON_FILE = "json_file";
+    public static final String CHAR_UUID = "character_uuid";
 
     Character mCurrentChar;
-
-    private TextView mAthletics,
-            mAcrobatics, mSoH, mStealth,
-            mArcana, mHistory, mInvestigation, mNature, mReligion,
-            mAnimHandling, mInsight, mMedicine, mPerception, mSurvival,
-            mDeception, mIntimidation, mPerformance, mPersuasion;
 
 
     public CharacterSheetSkillsFragment() {
         // Required empty public constructor
     }
 
-    public static CharacterSheetSkillsFragment newInstance(String json) {
+    public static CharacterSheetSkillsFragment newInstance(String uuid) {
         CharacterSheetSkillsFragment fragment = new CharacterSheetSkillsFragment();
         Bundle args = new Bundle();
-        args.putString(JSON_FILE, json);
+        args.putString(CHAR_UUID, uuid);
         fragment.setArguments(args);
 
         return fragment;
@@ -43,87 +39,67 @@ public class CharacterSheetSkillsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Gson gson = new Gson();
-        String json = getArguments().getString(JSON_FILE);
-        mCurrentChar = gson.fromJson(json, Character.class);
+        String uuid = getArguments().getString(CHAR_UUID);
+        mCurrentChar = new Gson().fromJson(DBWrapper.getCharEntity(uuid).getData(), Character.class);
 
         return inflater.inflate(R.layout.fragment_character_sheet_skills, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        Integer skillBonus;
-        mAthletics = getView().findViewById(R.id.athletics_bonus);
-        skillBonus = mCurrentChar.getStrScore().getModifier() + assignBonus("Athletics");
-        mAthletics.setText(skillBonus.toString());
+        TextView mAthletics = getView().findViewById(R.id.athletics_bonus);
+        mAthletics.setText(String.format(Locale.US, "%d", mCurrentChar.getStrScore().getModifier() + assignBonus("Athletics")));
 
-        mAcrobatics = getView().findViewById(R.id.acrobatics_bonus);
-        skillBonus = mCurrentChar.getDexScore().getModifier() + assignBonus("Acrobatics");
-        mAcrobatics.setText(skillBonus.toString());
+        TextView mAcrobatics = getView().findViewById(R.id.acrobatics_bonus);
+        mAcrobatics.setText(String.format(Locale.US, "%d", mCurrentChar.getDexScore().getModifier() + assignBonus("Acrobatics")));
 
-        mSoH = getView().findViewById(R.id.sleight_of_hand_bonus);
-        skillBonus = mCurrentChar.getDexScore().getModifier() + assignBonus("Sleight of Hand");
-        mSoH.setText(skillBonus.toString());
+        TextView mSoH = getView().findViewById(R.id.sleight_of_hand_bonus);
+        mSoH.setText(String.format(Locale.US, "%d", mCurrentChar.getDexScore().getModifier() + assignBonus("Sleight of Hand")));
 
-        mStealth = getView().findViewById(R.id.stealth_bonus);
-        skillBonus = mCurrentChar.getDexScore().getModifier() + assignBonus("Stealth");
-        mStealth.setText(skillBonus.toString());
+        TextView mStealth = getView().findViewById(R.id.stealth_bonus);
+        mStealth.setText(String.format(Locale.US, "%d", mCurrentChar.getDexScore().getModifier() + assignBonus("Stealth")));
 
-        mArcana = getView().findViewById(R.id.arcana_bonus);
-        skillBonus = mCurrentChar.getIntScore().getModifier() + assignBonus("Arcana");
-        mArcana.setText(skillBonus.toString());
+        TextView mArcana = getView().findViewById(R.id.arcana_bonus);
+        mArcana.setText(String.format(Locale.US, "%d", mCurrentChar.getIntScore().getModifier() + assignBonus("Arcana")));
 
-        mHistory = getView().findViewById(R.id.history_bonus);
-        skillBonus = mCurrentChar.getIntScore().getModifier() + assignBonus("History");
-        mHistory.setText(skillBonus.toString());
+        TextView mHistory = getView().findViewById(R.id.history_bonus);
+        mHistory.setText(String.format(Locale.US, "%d", mCurrentChar.getIntScore().getModifier() + assignBonus("History")));
 
-        mInvestigation = getView().findViewById(R.id.investigation_bonus);
-        skillBonus = mCurrentChar.getIntScore().getModifier() + assignBonus("Investigation");
-        mInvestigation.setText(skillBonus.toString());
+        TextView mInvestigation = getView().findViewById(R.id.investigation_bonus);
+        mInvestigation.setText(String.format(Locale.US, "%d", mCurrentChar.getIntScore().getModifier() + assignBonus("Investigation")));
 
-        mNature = getView().findViewById(R.id.nature_bonus);
-        skillBonus = mCurrentChar.getIntScore().getModifier() + assignBonus("Nature");
-        mNature.setText(skillBonus.toString());
+        TextView mNature = getView().findViewById(R.id.nature_bonus);
+        mNature.setText(String.format(Locale.US, "%d", mCurrentChar.getIntScore().getModifier() + assignBonus("Nature")));
 
-        mReligion = getView().findViewById(R.id.religion_bonus);
-        skillBonus = mCurrentChar.getIntScore().getModifier() + assignBonus("Religion");
-        mReligion.setText(skillBonus.toString());
+        TextView mReligion = getView().findViewById(R.id.religion_bonus);
+        mReligion.setText(String.format(Locale.US, "%d", mCurrentChar.getIntScore().getModifier() + assignBonus("Religion")));
 
-        mAnimHandling = getView().findViewById(R.id.animal_handling_bonus);
-        skillBonus = mCurrentChar.getWisScore().getModifier() + assignBonus("Animal Handling");
-        mAnimHandling.setText(skillBonus.toString());
+        TextView mAnimHandling = getView().findViewById(R.id.animal_handling_bonus);
+        mAnimHandling.setText(String.format(Locale.US, "%d", mCurrentChar.getWisScore().getModifier() + assignBonus("Animal Handling")));
 
-        mInsight = getView().findViewById(R.id.insight_bonus);
-        skillBonus = mCurrentChar.getWisScore().getModifier() + assignBonus("Insight");
-        mInsight.setText(skillBonus.toString());
+        TextView mInsight = getView().findViewById(R.id.insight_bonus);
+        mInsight.setText(String.format(Locale.US, "%d", mCurrentChar.getWisScore().getModifier() + assignBonus("Insight")));
 
-        mMedicine = getView().findViewById(R.id.medicine_bonus);
-        skillBonus = mCurrentChar.getWisScore().getModifier() + assignBonus("Medicine");
-        mMedicine.setText(skillBonus.toString());
+        TextView mMedicine = getView().findViewById(R.id.medicine_bonus);
+        mMedicine.setText(String.format(Locale.US, "%d", mCurrentChar.getWisScore().getModifier() + assignBonus("Medicine")));
 
-        mPerception = getView().findViewById(R.id.perception_bonus);
-        skillBonus = mCurrentChar.getWisScore().getModifier() + assignBonus("Perception");
-        mPerception.setText(skillBonus.toString());
+        TextView mPerception = getView().findViewById(R.id.perception_bonus);
+        mPerception.setText(String.format(Locale.US, "%d", mCurrentChar.getWisScore().getModifier() + assignBonus("Perception")));
 
-        mSurvival = getView().findViewById(R.id.survival_bonus);
-        skillBonus = mCurrentChar.getWisScore().getModifier() + assignBonus("Survival");
-        mSurvival.setText(skillBonus.toString());
+        TextView mSurvival = getView().findViewById(R.id.survival_bonus);
+        mSurvival.setText(String.format(Locale.US, "%d", mCurrentChar.getWisScore().getModifier() + assignBonus("Survival")));
 
-        mDeception = getView().findViewById(R.id.deception_bonus);
-        skillBonus = mCurrentChar.getChaScore().getModifier() + assignBonus("Deception");
-        mDeception.setText(skillBonus.toString());
+        TextView mDeception = getView().findViewById(R.id.deception_bonus);
+        mDeception.setText(String.format(Locale.US, "%d", mCurrentChar.getChaScore().getModifier() + assignBonus("Deception")));
 
-        mIntimidation = getView().findViewById(R.id.intimidation_bonus);
-        skillBonus = mCurrentChar.getChaScore().getModifier() + assignBonus("Intimidation");
-        mIntimidation.setText(skillBonus.toString());
+        TextView mIntimidation = getView().findViewById(R.id.intimidation_bonus);
+        mIntimidation.setText(String.format(Locale.US, "%d", mCurrentChar.getChaScore().getModifier() + assignBonus("Intimidation")));
 
-        mPerformance = getView().findViewById(R.id.performance_bonus);
-        skillBonus = mCurrentChar.getChaScore().getModifier() + assignBonus("Performance");
-        mPerformance.setText(skillBonus.toString());
+        TextView mPerformance = getView().findViewById(R.id.performance_bonus);
+        mPerformance.setText(String.format(Locale.US, "%d", mCurrentChar.getChaScore().getModifier() + assignBonus("Performance")));
 
-        mPersuasion = getView().findViewById(R.id.persuasion_bonus);
-        skillBonus = mCurrentChar.getChaScore().getModifier() + assignBonus("Persuasion");
-        mPersuasion .setText(skillBonus.toString());
+        TextView mPersuasion = getView().findViewById(R.id.persuasion_bonus);
+        mPersuasion.setText(String.format(Locale.US, "%d", mCurrentChar.getChaScore().getModifier() + assignBonus("Persuasion")));
     }
 
     public Integer assignBonus(String skill) {
