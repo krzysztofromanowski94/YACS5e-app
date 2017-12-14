@@ -101,6 +101,44 @@ public class DBWrapper {
         }
     }
 
+    /////////////////////////////////////////////////////////////////////////////////
+
+    private static void setToDelete(String uuid) {
+        try {
+            new SetToDelete().execute(uuid).get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static class SetToDelete extends AsyncTask<String, Void, Void> {
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            DBInstance.getHook().characterDao().setToDelete(strings[0]);
+            return null;
+        }
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////
+
+    private static void unsetToDelete(String uuid) {
+        try {
+            new UnsetToDelete().execute(uuid).get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static class UnsetToDelete extends AsyncTask<String, Void, Void> {
+
+        @Override
+        protected Void doInBackground(String... strings) {
+            DBInstance.getHook().characterDao().unsetToDelete(strings[0]);
+            return null;
+        }
+    }
+
     // ToDo usuń na podstawie uuid
     // ToDo dodaj cofnij usuń na podstawie uuid
     // ToDo jeśtli check toDelete - nie zwracaj w getUuidList

@@ -16,6 +16,9 @@ public interface CharacterDao {
     @Query("SELECT uuid FROM characters")
     List<String> getAllUuid();
 
+    @Query("SELECT uuid FROM characters WHERE to_delete = FALSE")
+    List<String> getAllUuidNotToDelete();
+
     @Query("SELECT * FROM characters WHERE uuid = :uuid")
     CharacterEntity getCharacter(String uuid);
 
@@ -27,6 +30,13 @@ public interface CharacterDao {
 
     @Query("UPDATE characters SET uuid = :newUuid WHERE uuid = :oldUuid")
     void updateUuid(String oldUuid, String newUuid);
+
+    @Query("UPDATE characters SET to_delete = TRUE where uuid = :uuid")
+    void setToDelete(String uuid);
+
+    @Query("UPDATE characters SET to_delete = FALSE where uuid = :uuid")
+    void unsetToDelete(String uuid);
+
 
     @Query("DELETE FROM characters")
     void truncate();

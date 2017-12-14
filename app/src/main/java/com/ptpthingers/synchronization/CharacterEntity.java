@@ -2,6 +2,7 @@ package com.ptpthingers.synchronization;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
@@ -24,6 +25,8 @@ public class CharacterEntity {
     private String ownerLogin;
     @ColumnInfo(name = "data")
     private String data;
+    @ColumnInfo(name = "to_delete")
+    private boolean toDelete;
 
     public CharacterEntity(@NonNull String uuid, String data) {
         this.data = data;
@@ -69,6 +72,14 @@ public class CharacterEntity {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public boolean isToDelete() {
+        return toDelete;
+    }
+
+    public void setToDelete(boolean toDelete) {
+        this.toDelete = toDelete;
     }
 
     public ByteString getDataByteString() {
