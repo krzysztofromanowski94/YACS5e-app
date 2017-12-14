@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.ptpthingers.synchronization.DBWrapper;
 
 import java.util.LinkedList;
-import java.util.List;
 
 public class CharacterListFragment extends Fragment {
 
@@ -25,7 +24,7 @@ public class CharacterListFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private CharacterAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private List<String> mCharacterList;
+    private LinkedList<String> mCharacterList;
 
     private OnFragmentInteractionListener mListener;
 
@@ -56,7 +55,7 @@ public class CharacterListFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new CharacterAdapter(DBWrapper.getUuidList());
+        mAdapter = new CharacterAdapter(mCharacterList);
         mRecyclerView.setAdapter(mAdapter);
 
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
@@ -64,7 +63,7 @@ public class CharacterListFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mCharacterList.add(new Character().post());
-                mAdapter.notifyItemInserted(DBWrapper.getUuidList().size());
+                mAdapter.notifyItemInserted(mCharacterList.size());
             }
         });
 
