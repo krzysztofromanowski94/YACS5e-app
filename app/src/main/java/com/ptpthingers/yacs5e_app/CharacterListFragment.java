@@ -8,7 +8,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +64,6 @@ public class CharacterListFragment extends Fragment {
             public void onClick(View view) {
                 mCharacterList.add(new Character().post());
                 mAdapter.notifyItemInserted(mCharacterList.size());
-                Log.d("mCharacterList", "Size: " + mCharacterList.size());
             }
         });
 
