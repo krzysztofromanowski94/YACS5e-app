@@ -125,6 +125,17 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
             // check if local data needs to be updated
             Long syncDifference = characterEntity.getLastSync() - received.getCharacter().getLastSync();
 
+            // 5 - to be deleted - set Character.Delete=true, send to server
+            if (characterEntity.isToDelete()) {
+                Log.i(TAG, "5 - Character " + characterEntity.getUuid() + " is to be deleted");
+                requestStream.onNext(TTalk.newBuilder()
+                        .setCharacter(TCharacter.newBuilder()
+                                .setUuid(characterEntity.getUuid())
+                                .setDelete(true))
+                        .build());
+                DBInstance.getHook().characterDao().deleteCharacterEntity(characterEntity.getUuid());
+
+            }
             // 0. even - receive even timestamp from server
             if (syncDifference == 0 && characterEntity.getLastMod() == received.getCharacter().getLastMod()) {
                 Log.i(TAG, "0 - character is even uuid: " + characterEntity.getUuid());
