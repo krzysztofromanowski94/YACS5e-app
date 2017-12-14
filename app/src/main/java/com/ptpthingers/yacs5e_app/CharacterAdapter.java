@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,7 +23,6 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
 
     public static final String CHAR_UUID = "character_uuid";
 
-//    private static List<Character> mCharacterList;
     private static List<String> mUuidList;
 
     public CharacterAdapter(List<String> uuidList) {
@@ -58,6 +58,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
         private final ImageView mCharacterPortrait;
         private final TextView mCharacterName;
         private final TextView mCharacterDesc;
+        private final ImageButton mCharacterDelete;
 
         public CharacterViewHolder(final View v) {
             super(v);
@@ -65,6 +66,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
             mCharacterPortrait = (ImageView) v.findViewById(R.id.thumb_image);
             mCharacterName = (TextView) v.findViewById(R.id.thumb_name);
             mCharacterDesc = (TextView) v.findViewById(R.id.thumb_desc);
+            mCharacterDelete = (ImageButton) v.findViewById(R.id.thumb_fav);
 
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -72,6 +74,14 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
                     Intent characterSheet = new Intent(mContext, CharacterSheetActivity.class);
                     characterSheet.putExtra(CHAR_UUID, mUuidList.get(getAdapterPosition()));
                     mContext.startActivity(characterSheet);
+                }
+            });
+
+            mCharacterDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    DBWrapper.setToDelete(mUuidList.get(getAdapterPosition()));
+                    CharacterListFragment.deleteItem(getAdapterPosition());
                 }
             });
         }
