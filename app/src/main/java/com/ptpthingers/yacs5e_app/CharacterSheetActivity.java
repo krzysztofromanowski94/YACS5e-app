@@ -16,10 +16,11 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.ptpthingers.synchronization.DBWrapper;
 
 public class CharacterSheetActivity extends AppCompatActivity {
 
-    public static final String JSON_FILE = "json_file";
+    public static final String CHAR_UUID = "character_uuid";
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
@@ -29,9 +30,8 @@ public class CharacterSheetActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Gson gson = new Gson();
-        String charStr = getIntent().getStringExtra(JSON_FILE);
-        thisChar = gson.fromJson(charStr, Character.class);
+        String uuid = getIntent().getStringExtra(CHAR_UUID);
+        thisChar = new Gson().fromJson(DBWrapper.getCharEntity(uuid).getData(), Character.class);
         setContentView(R.layout.activity_character_sheet);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.sheet_toolbar);
@@ -45,9 +45,7 @@ public class CharacterSheetActivity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.character_sheet_section);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -58,9 +56,6 @@ public class CharacterSheetActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -106,7 +101,7 @@ public class CharacterSheetActivity extends AppCompatActivity {
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
             Bundle bundle = new Bundle();
-            bundle.putString(JSON_FILE, gson.toJson(thisChar));
+            bundle.putString(CHAR_UUID, thisChar.getmUuid());
             switch (position) {
                 case 0:
                     CharacterSheetAbilityScoresFragment fr0 = new CharacterSheetAbilityScoresFragment();

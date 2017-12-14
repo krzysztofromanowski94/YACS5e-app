@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.ptpthingers.synchronization.DBWrapper;
 
 import java.util.List;
 
@@ -20,12 +20,13 @@ import java.util.List;
 
 public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder> {
 
-    public static final String JSON_FILE = "json_file";
+    public static final String CHAR_UUID = "character_uuid";
 
-    private static List<Character> mCharacterList;
+//    private static List<Character> mCharacterList;
+    private static List<String> mUuidList;
 
-    public CharacterAdapter(List<Character> characterList) {
-        mCharacterList = characterList;
+    public CharacterAdapter(List<String> uuidList) {
+        mUuidList = uuidList;
     }
 
     public CharacterViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -38,14 +39,14 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
 
     @Override
     public void onBindViewHolder(CharacterViewHolder viewHolder, int position) {
-        Character character = mCharacterList.get(position);
-        viewHolder.mCharacterName.setText(character.getCharName());
+        Character character = new Gson().fromJson(DBWrapper.getCharEntity(mUuidList.get(position)).getData(), Character.class);
+        viewHolder.mCharacterName.setText(character.getCharName() + position);
         viewHolder.mCharacterDesc.setText(character.getShortDesc());
     }
 
     @Override
     public int getItemCount() {
-        return mCharacterList.size();
+        return mUuidList.size();
     }
 
     // ViewHolder Implementation.
@@ -68,11 +69,8 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    GsonBuilder builder = new GsonBuilder();
-                    Gson gson = builder.create();
-                    builder.serializeNulls();
                     Intent characterSheet = new Intent(mContext, CharacterSheetActivity.class);
-                    characterSheet.putExtra(JSON_FILE, gson.toJson(mCharacterList.get(getAdapterPosition())));
+                    characterSheet.putExtra(CHAR_UUID, mUuidList.get(getAdapterPosition()));
                     mContext.startActivity(characterSheet);
                 }
             });

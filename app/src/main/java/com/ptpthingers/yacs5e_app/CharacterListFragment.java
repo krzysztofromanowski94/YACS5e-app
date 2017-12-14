@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.ptpthingers.synchronization.DBWrapper;
 
@@ -24,7 +25,7 @@ public class CharacterListFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private CharacterAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private List<Character> mCharacterList;
+    private List<String> mCharacterList;
 
     private OnFragmentInteractionListener mListener;
 
@@ -35,9 +36,12 @@ public class CharacterListFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mCharacterList = new LinkedList<Character>();
-        for (String uuid : DBWrapper.getUuidList()) {
-            mCharacterList.add(new Character(uuid));
+        mCharacterList = new LinkedList<>();
+        try {
+            mCharacterList.addAll(DBWrapper.getUuidList());
+        } catch (NullPointerException npe) {
+            TextView tv = getActivity().findViewById(R.id.empty_list_text);
+            tv.setText("No characters yet!\nTap the plus icon to create!");
         }
     }
 
@@ -52,17 +56,15 @@ public class CharacterListFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new CharacterAdapter(mCharacterList);
+        mAdapter = new CharacterAdapter(DBWrapper.getUuidList());
         mRecyclerView.setAdapter(mAdapter);
 
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Character newCharacter = new Character();
-                newCharacter.post();
-                mCharacterList.add(newCharacter);
-                mAdapter.notifyItemInserted(mCharacterList.size());
+                mCharacterList.add(new Character().post());
+                mAdapter.notifyItemInserted(DBWrapper.getUuidList().size());
             }
         });
 
