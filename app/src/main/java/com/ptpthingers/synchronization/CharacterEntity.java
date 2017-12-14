@@ -31,6 +31,7 @@ public class CharacterEntity {
     public CharacterEntity(@NonNull String uuid, String data) {
         this.data = data;
         this.uuid = uuid;
+        this.toDelete = false;
         lastMod = System.currentTimeMillis() / 1000L;
     }
 

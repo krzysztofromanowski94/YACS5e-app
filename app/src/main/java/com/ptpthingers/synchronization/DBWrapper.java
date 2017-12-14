@@ -103,7 +103,7 @@ public class DBWrapper {
 
     /////////////////////////////////////////////////////////////////////////////////
 
-    private static void setToDelete(String uuid) {
+    public static void setToDelete(String uuid) {
         try {
             new SetToDelete().execute(uuid).get();
         } catch (InterruptedException | ExecutionException e) {
@@ -122,7 +122,7 @@ public class DBWrapper {
 
     /////////////////////////////////////////////////////////////////////////////////
 
-    private static void unsetToDelete(String uuid) {
+    public static void unsetToDelete(String uuid) {
         try {
             new UnsetToDelete().execute(uuid).get();
         } catch (InterruptedException | ExecutionException e) {
