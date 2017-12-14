@@ -22,9 +22,9 @@ public class CharacterListFragment extends Fragment {
     public static final String CHARACTER_LIST = "character_list";
 
     private RecyclerView mRecyclerView;
-    private CharacterAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private LinkedList<String> mCharacterList;
+    private static CharacterAdapter mAdapter;
+    private static LinkedList<String> mCharacterList;
 
     private OnFragmentInteractionListener mListener;
 
@@ -91,5 +91,10 @@ public class CharacterListFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public static void deleteItem(int position) {
+        mCharacterList.remove(position);
+        mAdapter.notifyItemRemoved(position);
     }
 }

@@ -23,7 +23,6 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
 
     public static final String CHAR_UUID = "character_uuid";
 
-//    private static List<Character> mCharacterList;
     private static List<String> mUuidList;
 
     public CharacterAdapter(List<String> uuidList) {
@@ -82,6 +81,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
                 @Override
                 public void onClick(View view) {
                     DBWrapper.setToDelete(mUuidList.get(getAdapterPosition()));
+                    CharacterListFragment.deleteItem(getAdapterPosition());
                 }
             });
         }
