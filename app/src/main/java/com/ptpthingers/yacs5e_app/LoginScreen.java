@@ -1,5 +1,7 @@
 package com.ptpthingers.yacs5e_app;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
@@ -20,6 +22,8 @@ public class LoginScreen extends AppCompatActivity {
     private Button mSendButton;
     private EditText mLoginText, mPassText;
     private TextView mResultText;
+    private SharedPreferences accountSharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,9 @@ public class LoginScreen extends AppCompatActivity {
         mResultText.setMovementMethod(new ScrollingMovementMethod());
 
         mSendButton.setOnClickListener(mLoginListener);
+
+        accountSharedPreferences = this.getSharedPreferences("account", Context.MODE_PRIVATE);
+
     }
 
     private View.OnClickListener mLoginListener = new View.OnClickListener() {
@@ -54,7 +61,16 @@ public class LoginScreen extends AppCompatActivity {
                 result = new GrpcResult(false, "Something very wrong happened.");
                 e.printStackTrace();
             }
-            Toast.makeText(getApplicationContext(), result.toString(), Toast.LENGTH_SHORT).show();
+
+            if (result.isOk()) {
+                Toast.makeText(getApplicationContext(), "Successfully signed user " + mLoginText.getText().toString(), Toast.LENGTH_SHORT).show();
+                accountSharedPreferences.edit().putString("username", mLoginText.getText().toString()).apply();
+                accountSharedPreferences.edit().putString("password", mPassText.getText().toString()).apply();
+            }
+            else {
+                Toast.makeText(getApplicationContext(), "Error logging in...", Toast.LENGTH_SHORT).show();
+            }
+
         }
     };
 }

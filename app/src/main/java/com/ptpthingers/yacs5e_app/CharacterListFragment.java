@@ -85,7 +85,7 @@ public class CharacterListFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-        mCharacterList = null;
+//        mCharacterList = null;
     }
 
     public interface OnFragmentInteractionListener {
