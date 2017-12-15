@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.ptpthingers.synchronization.DBWrapper;
 
 public class CharacterSheetActivity extends AppCompatActivity {
@@ -98,8 +97,6 @@ public class CharacterSheetActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            GsonBuilder builder = new GsonBuilder();
-            Gson gson = builder.create();
             Bundle bundle = new Bundle();
             bundle.putString(CHAR_UUID, thisChar.getmUuid());
             switch (position) {
