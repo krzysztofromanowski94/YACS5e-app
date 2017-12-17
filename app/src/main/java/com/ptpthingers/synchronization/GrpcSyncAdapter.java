@@ -67,11 +67,17 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
 
         StreamObserver<TTalk> requestStream = asyncStub.synchronize(CreateRequestStreamObserver());
 
+        if (accountSharedPreferences.getString("username", "").equals("") || accountSharedPreferences.getString("password", "").equals("")) {
+            Log.i(TAG, "Not logged in");
+            return;
+        }
+
         // create user credentials message
         TTalk tTalk = TTalk.newBuilder().setUser(TUser.newBuilder()
-                .setLogin("testUser")
-                .setPassword("testPass"))
+                .setLogin(accountSharedPreferences.getString("username", ""))
+                .setPassword(accountSharedPreferences.getString("password", "")))
                 .build();
+
         // send user credentials message
         requestStream.onNext(tTalk);
 
@@ -84,16 +90,21 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
 
         if (received == null) {
             Log.i(TAG, "received is null. Something is very wrong :(");
+            Log.i(TAG, "Is signed in?");
             return;
         }
 
         switch (received.getUnionCase()) {
             case GOOD:
                 if (!received.getGood()) {
-                    Log.i(TAG, "Returning from attempt to login user");
+                    Log.i(TAG, "Not logged in");
                     // User is not logged in
                     return;
                 }
+                break;
+            default:
+                Log.i(TAG, "Wrong answer for logging");
+                return;
         }
         // User is logged in
 
@@ -134,10 +145,10 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
                                 .setDelete(true))
                         .build());
                 DBInstance.getHook().characterDao().deleteCharacterEntity(characterEntity.getUuid());
-
             }
+
             // 0. even - receive even timestamp from server
-            if (syncDifference == 0 && characterEntity.getLastMod() == received.getCharacter().getLastMod()) {
+            else if (syncDifference == 0 && characterEntity.getLastMod() == received.getCharacter().getLastMod()) {
                 Log.i(TAG, "0 - character is even uuid: " + characterEntity.getUuid());
             }
 
@@ -321,11 +332,9 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
         mPort = connectionSharedPreferences.getInt("mPort", 0);
 
         accountSharedPreferences = context.getSharedPreferences("account", Context.MODE_PRIVATE);
-        username = accountSharedPreferences.getString("username", "");
-        password = accountSharedPreferences.getString("password", "");
 
         messageQueue = new ArrayBlockingQueue<>(128);
-        db = DBInstance.getHook();
+        db = DBInstance.getHook(this.getContext());
     }
 }
 
