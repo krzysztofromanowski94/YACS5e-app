@@ -13,7 +13,7 @@ public final class GeneralAccount {
      * This is the type of account we are using. i.e. we can specify our app or apps
      * to have different types, such as 'read-only', 'sync-only', & 'admin'.
      */
-    private static final String ACCOUNT_TYPE = "com.ptpthingers.yacs5e";
+    private static final String ACCOUNT_TYPE = "com.ptpthingers.synchronization";
 
     /**
      * This is the name that appears in the Android 'Accounts' settings.

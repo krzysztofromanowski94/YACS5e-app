@@ -347,4 +347,13 @@ class Character implements Serializable {
         this.mShortDesc = tempChar.mShortDesc;
         this.traits = tempChar.getTraits();
     }
+
+    @Override
+    public String toString() {
+        return "Character{" +
+                "mCharName='" + mCharName + '\'' +
+                ", mShortDesc='" + mShortDesc + '\'' +
+                ", mUuid='" + mUuid + '\'' +
+                '}';
+    }
 }
