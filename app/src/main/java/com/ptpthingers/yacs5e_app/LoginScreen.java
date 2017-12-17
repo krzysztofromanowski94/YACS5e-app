@@ -35,13 +35,18 @@ public class LoginScreen extends AppCompatActivity {
         mSendButton.setOnClickListener(mLoginListener);
     }
 
+    private boolean validate() {
+        if(mLoginText.getText().toString().isEmpty() || mPassText.getText().toString().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "You need to fill in the fields!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
     private View.OnClickListener mLoginListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(mLoginText.getText().toString().isEmpty() || mPassText.getText().toString().isEmpty()) {
-                Toast.makeText(getApplicationContext(), "You need to fill in the fields!", Toast.LENGTH_SHORT).show();
-                return;
-            }
+            if (!validate()) return;
 
             GrpcResult result;
             try {
@@ -55,6 +60,16 @@ public class LoginScreen extends AppCompatActivity {
                 e.printStackTrace();
             }
             Toast.makeText(getApplicationContext(), result.toString(), Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    private View.OnClickListener mRegisterListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (!validate()) return;
+
+            //TODO
+
         }
     };
 }
