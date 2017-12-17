@@ -1,5 +1,7 @@
 package com.ptpthingers.yacs5e_app;
 
+import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -95,6 +97,12 @@ public class MainActivity extends AppCompatActivity
 
         switch (id) {
             case R.id.action_settings:
+                Bundle settingsBundle = new Bundle();
+                settingsBundle.putBoolean(
+                        ContentResolver.SYNC_EXTRAS_MANUAL, true);
+                settingsBundle.putBoolean(
+                        ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+                ContentResolver.requestSync(GeneralAccount.getAccount(), GeneralAccount.AUTHORITY, settingsBundle);
                 return true;
         }
 

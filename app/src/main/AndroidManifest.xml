@@ -51,7 +51,7 @@
 
         <provider
             android:name="com.ptpthingers.synchronization.CharacterContentProvider"
-            android:authorities="com.ptpthingers.synchronization"
+            android:authorities="@string/authority"
             android:exported="false"
             android:syncable="true" />
 
