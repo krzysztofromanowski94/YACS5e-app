@@ -23,6 +23,7 @@ public class CharacterListFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
+    private int mCurrentVisiblePosition;
     private static CharacterAdapter mAdapter;
     private static LinkedList<String> mCharacterList;
 
@@ -35,6 +36,7 @@ public class CharacterListFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mCurrentVisiblePosition = 0;
         mCharacterList = new LinkedList<>();
         try {
             mCharacterList.addAll(DBWrapper.getUuidList());
@@ -82,10 +84,23 @@ public class CharacterListFragment extends Fragment {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        mCurrentVisiblePosition = 0;
+        mCurrentVisiblePosition = ((LinearLayoutManager)mRecyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((LinearLayoutManager)mRecyclerView.getLayoutManager()).scrollToPosition(mCurrentVisiblePosition);
+        mCurrentVisiblePosition = 0;
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
-//        mCharacterList = null;
     }
 
     public interface OnFragmentInteractionListener {
@@ -96,5 +111,10 @@ public class CharacterListFragment extends Fragment {
     public static void deleteItem(int position) {
         mCharacterList.remove(position);
         mAdapter.notifyItemRemoved(position);
+    }
+
+    public static void addItem(int position, String item) {
+        mCharacterList.add(position, item);
+        mAdapter.notifyItemInserted(position);
     }
 }

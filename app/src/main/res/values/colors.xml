@@ -4,6 +4,10 @@
     <color name="colorPrimaryDark">#212121</color>
     <color name="colorAccent">#FF9100</color>
     <color name="cardTextdesc">#FFF</color>
-    <color name="loginScreenStatus">#20000000</color>
-    <color name="colorSheetIcon">#99F5F5F5</color>
+    <color name="colorSheetIcon">#0000</color>
+
+    <!--Login and Register Screens-->
+    <color name="colorLoginButtonBackground">#2962FF</color>
+    <color name="colorLoginButtonText">#FFF9C4</color>
+
 </resources>
