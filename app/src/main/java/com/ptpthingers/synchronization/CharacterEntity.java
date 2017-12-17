@@ -92,7 +92,7 @@ public class CharacterEntity {
         return TTalk.newBuilder()
                 .setCharacter(TCharacter.newBuilder()
                         .setUuid(uuid)
-                        .setBlob(ByteString.copyFromUtf8(data))
+                        .setBlob(data)
                         .setLastSync(lastSync)
                         .setLastMod(lastMod))
                 .build();
