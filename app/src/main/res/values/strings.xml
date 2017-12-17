@@ -16,6 +16,9 @@
     <string name="login_button">Login</string>
     <string name="register_button">Register</string>
 
+    <!-- Account and Sync Adapter Authority -->
+    <string name="authority">com.ptpthingers.synchronization</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="title_activity_character_sheet">CharacterSheetActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>

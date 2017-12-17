@@ -1,5 +1,7 @@
 package com.ptpthingers.yacs5e_app;
 
+import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
