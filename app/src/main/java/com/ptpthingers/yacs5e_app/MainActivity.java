@@ -97,12 +97,6 @@ public class MainActivity extends AppCompatActivity
 
         switch (id) {
             case R.id.action_settings:
-                Bundle settingsBundle = new Bundle();
-                settingsBundle.putBoolean(
-                        ContentResolver.SYNC_EXTRAS_MANUAL, true);
-                settingsBundle.putBoolean(
-                        ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
-                ContentResolver.requestSync(GeneralAccount.getAccount(), GeneralAccount.AUTHORITY, settingsBundle);
                 return true;
         }
 
