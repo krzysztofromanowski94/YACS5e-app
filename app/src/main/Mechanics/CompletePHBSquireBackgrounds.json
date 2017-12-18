@@ -1,0 +1,1541 @@
+{
+  "dbVersion" : 31,
+  "objects" : [ {
+    "type" : "Background",
+    "armorProfs" : [ ],
+    "armorTypeProfs" : [ ],
+    "bonds" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "BOND",
+      "description" : "n/a",
+      "id" : 45
+    } ],
+    "description" : ".",
+    "flaws" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "FLAW",
+      "description" : "n/a",
+      "id" : 46
+    } ],
+    "ideals" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "IDEAL",
+      "description" : "n/a",
+      "id" : 44
+    } ],
+    "languageProfs" : [ ],
+    "name" : "Acolyte",
+    "personalities" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 42
+    }, {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 43
+    } ],
+    "savingThrowProfs" : [ ],
+    "skillProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 7,
+      "name" : "Insight",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 15,
+      "name" : "Religion",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "toolProfs" : [ ],
+    "variations" : [ ],
+    "weaponProfs" : [ ],
+    "weaponTypeProfs" : [ ]
+  }, {
+    "type" : "Background",
+    "armorProfs" : [ ],
+    "armorTypeProfs" : [ ],
+    "bonds" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "BOND",
+      "description" : "n/a",
+      "id" : 40
+    } ],
+    "description" : "You have always had a way with people. You know what makes them tick, you can tease out their hearts' desires after a few minutes of conversation, and with a few leading questions you can read them like they were children's books. It’s a useful talent, and one that you’re perfectly willing to use for your advantage.\r\n\nYou know what people want and you deliver, or rather, you promise to deliver. Common sense should steer people away from things that sound too good to be true, but common sense seems to be in short supply when you’re around. The bottle of pink-colored liquid will surely cure that unseemly rash, this ointment—nothing more than a bit of fat with a sprinkle of silver dust—can restore youth and vigor, and there’s a bridge in the city that just happens to be for sale. These marvels sound implausible, but you make them sound like the real deal.",
+    "flaws" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "FLAW",
+      "description" : "n/a",
+      "id" : 41
+    } ],
+    "ideals" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "IDEAL",
+      "description" : "n/a",
+      "id" : 39
+    } ],
+    "languageProfs" : [ ],
+    "name" : "Charlatan",
+    "personalities" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 37
+    }, {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 38
+    } ],
+    "savingThrowProfs" : [ ],
+    "skillProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 5,
+      "name" : "Deception",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 16,
+      "name" : "Sleight of Hand",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "toolProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 139,
+      "name" : "Disguise Kit",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 140,
+      "name" : "Forgery Kit",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "variations" : [ ],
+    "weaponProfs" : [ ],
+    "weaponTypeProfs" : [ ]
+  }, {
+    "type" : "Background",
+    "armorProfs" : [ ],
+    "armorTypeProfs" : [ ],
+    "bonds" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "BOND",
+      "description" : "n/a",
+      "id" : 50
+    } ],
+    "description" : "",
+    "flaws" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "FLAW",
+      "description" : "n/a",
+      "id" : 51
+    } ],
+    "ideals" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "IDEAL",
+      "description" : "n/a",
+      "id" : 49
+    } ],
+    "languageProfs" : [ ],
+    "name" : "Criminal",
+    "personalities" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 47
+    }, {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 48
+    } ],
+    "savingThrowProfs" : [ ],
+    "skillProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 5,
+      "name" : "Deception",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 17,
+      "name" : "Stealth",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "toolProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 158,
+      "name" : "Thieves' Tools",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "variations" : [ ],
+    "weaponProfs" : [ ],
+    "weaponTypeProfs" : [ ]
+  }, {
+    "type" : "Background",
+    "armorProfs" : [ ],
+    "armorTypeProfs" : [ ],
+    "bonds" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "BOND",
+      "description" : "n/a",
+      "id" : 56
+    } ],
+    "description" : "",
+    "flaws" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "FLAW",
+      "description" : "n/a",
+      "id" : 57
+    } ],
+    "ideals" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "IDEAL",
+      "description" : "n/a",
+      "id" : 55
+    } ],
+    "languageProfs" : [ ],
+    "name" : "Entertainer",
+    "personalities" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 53
+    }, {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 54
+    } ],
+    "savingThrowProfs" : [ ],
+    "skillProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 1,
+      "name" : "Acrobatics",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 13,
+      "name" : "Performance",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "toolProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 139,
+      "name" : "Disguise Kit",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "variations" : [ ],
+    "weaponProfs" : [ ],
+    "weaponTypeProfs" : [ ]
+  }, {
+    "type" : "Background",
+    "armorProfs" : [ ],
+    "armorTypeProfs" : [ ],
+    "bonds" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "BOND",
+      "description" : "n/a",
+      "id" : 61
+    } ],
+    "description" : "",
+    "flaws" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "FLAW",
+      "description" : "n/a",
+      "id" : 62
+    } ],
+    "ideals" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "IDEAL",
+      "description" : "n/a",
+      "id" : 60
+    } ],
+    "languageProfs" : [ ],
+    "name" : "Folk Hero",
+    "personalities" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 58
+    }, {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 59
+    } ],
+    "savingThrowProfs" : [ ],
+    "skillProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 2,
+      "name" : "Animal Handling",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 18,
+      "name" : "Survival",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "toolProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 159,
+      "name" : "Carriage",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 160,
+      "name" : "Cart",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 161,
+      "name" : "Chariot",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 162,
+      "name" : "Sled",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 163,
+      "name" : "Wagon",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "variations" : [ ],
+    "weaponProfs" : [ ],
+    "weaponTypeProfs" : [ ]
+  }, {
+    "type" : "Background",
+    "armorProfs" : [ ],
+    "armorTypeProfs" : [ ],
+    "bonds" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "BOND",
+      "description" : "n/a",
+      "id" : 112
+    } ],
+    "description" : "",
+    "flaws" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "FLAW",
+      "description" : "n/a",
+      "id" : 113
+    } ],
+    "ideals" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "IDEAL",
+      "description" : "n/a",
+      "id" : 111
+    } ],
+    "languageProfs" : [ ],
+    "name" : "Gladiator",
+    "parentBackground" : {
+      "type" : "Background",
+      "armorProfs" : [ ],
+      "armorTypeProfs" : [ ],
+      "bonds" : [ {
+        "type" : "BackgroundDetail",
+        "backgroundDetailType" : "BOND",
+        "description" : "n/a",
+        "id" : 56
+      } ],
+      "description" : "",
+      "flaws" : [ {
+        "type" : "BackgroundDetail",
+        "backgroundDetailType" : "FLAW",
+        "description" : "n/a",
+        "id" : 57
+      } ],
+      "ideals" : [ {
+        "type" : "BackgroundDetail",
+        "backgroundDetailType" : "IDEAL",
+        "description" : "n/a",
+        "id" : 55
+      } ],
+      "languageProfs" : [ ],
+      "name" : "Entertainer",
+      "personalities" : [ {
+        "type" : "BackgroundDetail",
+        "backgroundDetailType" : "PERSONALITY",
+        "description" : "n/a",
+        "id" : 53
+      }, {
+        "type" : "BackgroundDetail",
+        "backgroundDetailType" : "PERSONALITY",
+        "description" : "n/a",
+        "id" : 54
+      } ],
+      "savingThrowProfs" : [ ],
+      "skillProfs" : [ {
+        "attuned" : false,
+        "cursed" : false,
+        "description" : "",
+        "id" : 1,
+        "name" : "Acrobatics",
+        "poisoned" : false,
+        "silvered" : false
+      }, {
+        "attuned" : false,
+        "cursed" : false,
+        "description" : "",
+        "id" : 13,
+        "name" : "Performance",
+        "poisoned" : false,
+        "silvered" : false
+      } ],
+      "toolProfs" : [ {
+        "attuned" : false,
+        "cursed" : false,
+        "description" : "",
+        "id" : 139,
+        "name" : "Disguise Kit",
+        "poisoned" : false,
+        "silvered" : false
+      } ],
+      "variations" : [ ],
+      "weaponProfs" : [ ],
+      "weaponTypeProfs" : [ ]
+    },
+    "personalities" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 109
+    }, {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 110
+    } ],
+    "savingThrowProfs" : [ ],
+    "skillProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 1,
+      "name" : "Acrobatics",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 13,
+      "name" : "Performance",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "toolProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 139,
+      "name" : "Disguise Kit",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "variations" : [ ],
+    "weaponProfs" : [ ],
+    "weaponTypeProfs" : [ ]
+  }, {
+    "type" : "Background",
+    "armorProfs" : [ ],
+    "armorTypeProfs" : [ ],
+    "bonds" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "BOND",
+      "description" : "n/a",
+      "id" : 66
+    } ],
+    "description" : "",
+    "flaws" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "FLAW",
+      "description" : "n/a",
+      "id" : 67
+    } ],
+    "ideals" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "IDEAL",
+      "description" : "n/a",
+      "id" : 65
+    } ],
+    "languageProfs" : [ ],
+    "name" : "Guild Artisan",
+    "personalities" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 63
+    }, {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 64
+    } ],
+    "savingThrowProfs" : [ ],
+    "skillProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 7,
+      "name" : "Insight",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 14,
+      "name" : "Persuasion",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "toolProfs" : [ ],
+    "variations" : [ ],
+    "weaponProfs" : [ ],
+    "weaponTypeProfs" : [ ]
+  }, {
+    "type" : "Background",
+    "armorProfs" : [ ],
+    "armorTypeProfs" : [ ],
+    "bonds" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "BOND",
+      "description" : "n/a",
+      "id" : 117
+    } ],
+    "description" : "",
+    "flaws" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "FLAW",
+      "description" : "n/a",
+      "id" : 118
+    } ],
+    "ideals" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "IDEAL",
+      "description" : "n/a",
+      "id" : 116
+    } ],
+    "languageProfs" : [ ],
+    "name" : "Guild Merchant",
+    "parentBackground" : {
+      "type" : "Background",
+      "armorProfs" : [ ],
+      "armorTypeProfs" : [ ],
+      "bonds" : [ {
+        "type" : "BackgroundDetail",
+        "backgroundDetailType" : "BOND",
+        "description" : "n/a",
+        "id" : 66
+      } ],
+      "description" : "",
+      "flaws" : [ {
+        "type" : "BackgroundDetail",
+        "backgroundDetailType" : "FLAW",
+        "description" : "n/a",
+        "id" : 67
+      } ],
+      "ideals" : [ {
+        "type" : "BackgroundDetail",
+        "backgroundDetailType" : "IDEAL",
+        "description" : "n/a",
+        "id" : 65
+      } ],
+      "languageProfs" : [ ],
+      "name" : "Guild Artisan",
+      "personalities" : [ {
+        "type" : "BackgroundDetail",
+        "backgroundDetailType" : "PERSONALITY",
+        "description" : "n/a",
+        "id" : 63
+      }, {
+        "type" : "BackgroundDetail",
+        "backgroundDetailType" : "PERSONALITY",
+        "description" : "n/a",
+        "id" : 64
+      } ],
+      "savingThrowProfs" : [ ],
+      "skillProfs" : [ {
+        "attuned" : false,
+        "cursed" : false,
+        "description" : "",
+        "id" : 7,
+        "name" : "Insight",
+        "poisoned" : false,
+        "silvered" : false
+      }, {
+        "attuned" : false,
+        "cursed" : false,
+        "description" : "",
+        "id" : 14,
+        "name" : "Persuasion",
+        "poisoned" : false,
+        "silvered" : false
+      } ],
+      "toolProfs" : [ ],
+      "variations" : [ ],
+      "weaponProfs" : [ ],
+      "weaponTypeProfs" : [ ]
+    },
+    "personalities" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 114
+    }, {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 115
+    } ],
+    "savingThrowProfs" : [ ],
+    "skillProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 7,
+      "name" : "Insight",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 14,
+      "name" : "Persuasion",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "toolProfs" : [ ],
+    "variations" : [ ],
+    "weaponProfs" : [ ],
+    "weaponTypeProfs" : [ ]
+  }, {
+    "type" : "Background",
+    "armorProfs" : [ ],
+    "armorTypeProfs" : [ ],
+    "bonds" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "BOND",
+      "description" : "n/a",
+      "id" : 71
+    } ],
+    "description" : "",
+    "flaws" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "FLAW",
+      "description" : "n/a",
+      "id" : 72
+    } ],
+    "ideals" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "IDEAL",
+      "description" : "n/a",
+      "id" : 70
+    } ],
+    "languageProfs" : [ ],
+    "name" : "Hermit",
+    "personalities" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 68
+    }, {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 69
+    } ],
+    "savingThrowProfs" : [ ],
+    "skillProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 10,
+      "name" : "Medicine",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 15,
+      "name" : "Religion",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "toolProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 145,
+      "name" : "Herbalism Kit",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "variations" : [ ],
+    "weaponProfs" : [ ],
+    "weaponTypeProfs" : [ ]
+  }, {
+    "type" : "Background",
+    "armorProfs" : [ ],
+    "armorTypeProfs" : [ ],
+    "bonds" : [ ],
+    "description" : "",
+    "flaws" : [ ],
+    "ideals" : [ ],
+    "languageProfs" : [ ],
+    "name" : "Knight",
+    "parentBackground" : {
+      "type" : "Background",
+      "armorProfs" : [ ],
+      "armorTypeProfs" : [ ],
+      "bonds" : [ {
+        "type" : "BackgroundDetail",
+        "backgroundDetailType" : "BOND",
+        "description" : "n/a",
+        "id" : 76
+      } ],
+      "description" : "",
+      "flaws" : [ {
+        "type" : "BackgroundDetail",
+        "backgroundDetailType" : "FLAW",
+        "description" : "n/a",
+        "id" : 77
+      } ],
+      "ideals" : [ {
+        "type" : "BackgroundDetail",
+        "backgroundDetailType" : "IDEAL",
+        "description" : "n/a",
+        "id" : 75
+      } ],
+      "languageProfs" : [ ],
+      "name" : "Noble",
+      "personalities" : [ {
+        "type" : "BackgroundDetail",
+        "backgroundDetailType" : "PERSONALITY",
+        "description" : "n/a",
+        "id" : 73
+      }, {
+        "type" : "BackgroundDetail",
+        "backgroundDetailType" : "PERSONALITY",
+        "description" : "n/a",
+        "id" : 74
+      } ],
+      "savingThrowProfs" : [ ],
+      "skillProfs" : [ {
+        "attuned" : false,
+        "cursed" : false,
+        "description" : "",
+        "id" : 6,
+        "name" : "History",
+        "poisoned" : false,
+        "silvered" : false
+      }, {
+        "attuned" : false,
+        "cursed" : false,
+        "description" : "",
+        "id" : 14,
+        "name" : "Persuasion",
+        "poisoned" : false,
+        "silvered" : false
+      } ],
+      "toolProfs" : [ ],
+      "variations" : [ ],
+      "weaponProfs" : [ ],
+      "weaponTypeProfs" : [ ]
+    },
+    "personalities" : [ ],
+    "savingThrowProfs" : [ ],
+    "skillProfs" : [ ],
+    "toolProfs" : [ ],
+    "variations" : [ ],
+    "weaponProfs" : [ ],
+    "weaponTypeProfs" : [ ]
+  }, {
+    "type" : "Background",
+    "armorProfs" : [ ],
+    "armorTypeProfs" : [ ],
+    "bonds" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "BOND",
+      "description" : "n/a",
+      "id" : 76
+    } ],
+    "description" : "",
+    "flaws" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "FLAW",
+      "description" : "n/a",
+      "id" : 77
+    } ],
+    "ideals" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "IDEAL",
+      "description" : "n/a",
+      "id" : 75
+    } ],
+    "languageProfs" : [ ],
+    "name" : "Noble",
+    "personalities" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 73
+    }, {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 74
+    } ],
+    "savingThrowProfs" : [ ],
+    "skillProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 6,
+      "name" : "History",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 14,
+      "name" : "Persuasion",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "toolProfs" : [ ],
+    "variations" : [ ],
+    "weaponProfs" : [ ],
+    "weaponTypeProfs" : [ ]
+  }, {
+    "type" : "Background",
+    "armorProfs" : [ ],
+    "armorTypeProfs" : [ ],
+    "bonds" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "BOND",
+      "description" : "n/a",
+      "id" : 81
+    } ],
+    "description" : "",
+    "flaws" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "FLAW",
+      "description" : "n/a",
+      "id" : 82
+    } ],
+    "ideals" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "IDEAL",
+      "description" : "n/a",
+      "id" : 80
+    } ],
+    "languageProfs" : [ ],
+    "name" : "Outlander",
+    "personalities" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 78
+    }, {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 79
+    } ],
+    "savingThrowProfs" : [ ],
+    "skillProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 4,
+      "name" : "Athletics",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 18,
+      "name" : "Survival",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "toolProfs" : [ ],
+    "variations" : [ ],
+    "weaponProfs" : [ ],
+    "weaponTypeProfs" : [ ]
+  }, {
+    "type" : "Background",
+    "armorProfs" : [ ],
+    "armorTypeProfs" : [ ],
+    "bonds" : [ ],
+    "description" : "",
+    "flaws" : [ ],
+    "ideals" : [ ],
+    "languageProfs" : [ ],
+    "name" : "Pirate",
+    "parentBackground" : {
+      "type" : "Background",
+      "armorProfs" : [ ],
+      "armorTypeProfs" : [ ],
+      "bonds" : [ {
+        "type" : "BackgroundDetail",
+        "backgroundDetailType" : "BOND",
+        "description" : "n/a",
+        "id" : 91
+      } ],
+      "description" : "",
+      "flaws" : [ {
+        "type" : "BackgroundDetail",
+        "backgroundDetailType" : "FLAW",
+        "description" : "n/a",
+        "id" : 92
+      } ],
+      "ideals" : [ {
+        "type" : "BackgroundDetail",
+        "backgroundDetailType" : "IDEAL",
+        "description" : "n/a",
+        "id" : 90
+      } ],
+      "languageProfs" : [ ],
+      "name" : "Sailor",
+      "personalities" : [ {
+        "type" : "BackgroundDetail",
+        "backgroundDetailType" : "PERSONALITY",
+        "description" : "n/a",
+        "id" : 88
+      }, {
+        "type" : "BackgroundDetail",
+        "backgroundDetailType" : "PERSONALITY",
+        "description" : "n/a",
+        "id" : 89
+      } ],
+      "savingThrowProfs" : [ ],
+      "skillProfs" : [ {
+        "attuned" : false,
+        "cursed" : false,
+        "description" : "",
+        "id" : 4,
+        "name" : "Athletics",
+        "poisoned" : false,
+        "silvered" : false
+      }, {
+        "attuned" : false,
+        "cursed" : false,
+        "description" : "",
+        "id" : 12,
+        "name" : "Perception",
+        "poisoned" : false,
+        "silvered" : false
+      } ],
+      "toolProfs" : [ {
+        "attuned" : false,
+        "cursed" : false,
+        "description" : "",
+        "id" : 156,
+        "name" : "Navigator's Tools",
+        "poisoned" : false,
+        "silvered" : false
+      }, {
+        "attuned" : false,
+        "cursed" : false,
+        "description" : "",
+        "id" : 164,
+        "name" : "Galley",
+        "poisoned" : false,
+        "silvered" : false
+      }, {
+        "attuned" : false,
+        "cursed" : false,
+        "description" : "",
+        "id" : 165,
+        "name" : "Keelboat",
+        "poisoned" : false,
+        "silvered" : false
+      }, {
+        "attuned" : false,
+        "cursed" : false,
+        "description" : "",
+        "id" : 166,
+        "name" : "Longship",
+        "poisoned" : false,
+        "silvered" : false
+      }, {
+        "attuned" : false,
+        "cursed" : false,
+        "description" : "",
+        "id" : 167,
+        "name" : "Rowboat",
+        "poisoned" : false,
+        "silvered" : false
+      }, {
+        "attuned" : false,
+        "cursed" : false,
+        "description" : "",
+        "id" : 168,
+        "name" : "Sailing Ship",
+        "poisoned" : false,
+        "silvered" : false
+      }, {
+        "attuned" : false,
+        "cursed" : false,
+        "description" : "",
+        "id" : 169,
+        "name" : "Warship",
+        "poisoned" : false,
+        "silvered" : false
+      } ],
+      "variations" : [ ],
+      "weaponProfs" : [ ],
+      "weaponTypeProfs" : [ ]
+    },
+    "personalities" : [ ],
+    "savingThrowProfs" : [ ],
+    "skillProfs" : [ ],
+    "toolProfs" : [ ],
+    "variations" : [ ],
+    "weaponProfs" : [ ],
+    "weaponTypeProfs" : [ ]
+  }, {
+    "type" : "Background",
+    "armorProfs" : [ ],
+    "armorTypeProfs" : [ ],
+    "bonds" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "BOND",
+      "description" : "n/a",
+      "id" : 86
+    } ],
+    "description" : "",
+    "flaws" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "FLAW",
+      "description" : "n/a",
+      "id" : 87
+    } ],
+    "ideals" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "IDEAL",
+      "description" : "n/a",
+      "id" : 85
+    } ],
+    "languageProfs" : [ ],
+    "name" : "Sage",
+    "personalities" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 83
+    }, {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 84
+    } ],
+    "savingThrowProfs" : [ ],
+    "skillProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 3,
+      "name" : "Arcana",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 6,
+      "name" : "History",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "toolProfs" : [ ],
+    "variations" : [ ],
+    "weaponProfs" : [ ],
+    "weaponTypeProfs" : [ ]
+  }, {
+    "type" : "Background",
+    "armorProfs" : [ ],
+    "armorTypeProfs" : [ ],
+    "bonds" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "BOND",
+      "description" : "n/a",
+      "id" : 91
+    } ],
+    "description" : "",
+    "flaws" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "FLAW",
+      "description" : "n/a",
+      "id" : 92
+    } ],
+    "ideals" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "IDEAL",
+      "description" : "n/a",
+      "id" : 90
+    } ],
+    "languageProfs" : [ ],
+    "name" : "Sailor",
+    "personalities" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 88
+    }, {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 89
+    } ],
+    "savingThrowProfs" : [ ],
+    "skillProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 4,
+      "name" : "Athletics",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 12,
+      "name" : "Perception",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "toolProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 156,
+      "name" : "Navigator's Tools",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 164,
+      "name" : "Galley",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 165,
+      "name" : "Keelboat",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 166,
+      "name" : "Longship",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 167,
+      "name" : "Rowboat",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 168,
+      "name" : "Sailing Ship",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 169,
+      "name" : "Warship",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "variations" : [ ],
+    "weaponProfs" : [ ],
+    "weaponTypeProfs" : [ ]
+  }, {
+    "type" : "Background",
+    "armorProfs" : [ ],
+    "armorTypeProfs" : [ ],
+    "bonds" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "BOND",
+      "description" : "n/a",
+      "id" : 96
+    } ],
+    "description" : "",
+    "flaws" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "FLAW",
+      "description" : "n/a",
+      "id" : 97
+    } ],
+    "ideals" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "IDEAL",
+      "description" : "n/a",
+      "id" : 95
+    } ],
+    "languageProfs" : [ ],
+    "name" : "Soldier",
+    "personalities" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 93
+    }, {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 94
+    } ],
+    "savingThrowProfs" : [ ],
+    "skillProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 4,
+      "name" : "Athletics",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 8,
+      "name" : "Intimidation",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "toolProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 159,
+      "name" : "Carriage",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 160,
+      "name" : "Cart",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 161,
+      "name" : "Chariot",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 162,
+      "name" : "Sled",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 163,
+      "name" : "Wagon",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "variations" : [ ],
+    "weaponProfs" : [ ],
+    "weaponTypeProfs" : [ ]
+  }, {
+    "type" : "Background",
+    "armorProfs" : [ ],
+    "armorTypeProfs" : [ ],
+    "bonds" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "BOND",
+      "description" : "n/a",
+      "id" : 107
+    } ],
+    "description" : "Although your capabilities are not much different from those of a burglar or smuggler, you learned and practiced them in a very different context: as an espionage agent.\nYou might have been an officially sanctioned agent of the crown, or perhaps you sold the secrets you uncovered to the highest bidder.",
+    "flaws" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "FLAW",
+      "description" : "n/a",
+      "id" : 108
+    } ],
+    "ideals" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "IDEAL",
+      "description" : "n/a",
+      "id" : 106
+    } ],
+    "languageProfs" : [ ],
+    "name" : "Spy",
+    "parentBackground" : {
+      "type" : "Background",
+      "armorProfs" : [ ],
+      "armorTypeProfs" : [ ],
+      "bonds" : [ {
+        "type" : "BackgroundDetail",
+        "backgroundDetailType" : "BOND",
+        "description" : "n/a",
+        "id" : 50
+      } ],
+      "description" : "",
+      "flaws" : [ {
+        "type" : "BackgroundDetail",
+        "backgroundDetailType" : "FLAW",
+        "description" : "n/a",
+        "id" : 51
+      } ],
+      "ideals" : [ {
+        "type" : "BackgroundDetail",
+        "backgroundDetailType" : "IDEAL",
+        "description" : "n/a",
+        "id" : 49
+      } ],
+      "languageProfs" : [ ],
+      "name" : "Criminal",
+      "personalities" : [ {
+        "type" : "BackgroundDetail",
+        "backgroundDetailType" : "PERSONALITY",
+        "description" : "n/a",
+        "id" : 47
+      }, {
+        "type" : "BackgroundDetail",
+        "backgroundDetailType" : "PERSONALITY",
+        "description" : "n/a",
+        "id" : 48
+      } ],
+      "savingThrowProfs" : [ ],
+      "skillProfs" : [ {
+        "attuned" : false,
+        "cursed" : false,
+        "description" : "",
+        "id" : 5,
+        "name" : "Deception",
+        "poisoned" : false,
+        "silvered" : false
+      }, {
+        "attuned" : false,
+        "cursed" : false,
+        "description" : "",
+        "id" : 17,
+        "name" : "Stealth",
+        "poisoned" : false,
+        "silvered" : false
+      } ],
+      "toolProfs" : [ {
+        "attuned" : false,
+        "cursed" : false,
+        "description" : "",
+        "id" : 158,
+        "name" : "Thieves' Tools",
+        "poisoned" : false,
+        "silvered" : false
+      } ],
+      "variations" : [ ],
+      "weaponProfs" : [ ],
+      "weaponTypeProfs" : [ ]
+    },
+    "personalities" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 104
+    }, {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 105
+    } ],
+    "savingThrowProfs" : [ ],
+    "skillProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 5,
+      "name" : "Deception",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 17,
+      "name" : "Stealth",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "toolProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 158,
+      "name" : "Thieves' Tools",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "variations" : [ ],
+    "weaponProfs" : [ ],
+    "weaponTypeProfs" : [ ]
+  }, {
+    "type" : "Background",
+    "armorProfs" : [ ],
+    "armorTypeProfs" : [ ],
+    "bonds" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "BOND",
+      "description" : "n/a",
+      "id" : 101
+    } ],
+    "description" : "",
+    "flaws" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "FLAW",
+      "description" : "n/a",
+      "id" : 102
+    } ],
+    "ideals" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "IDEAL",
+      "description" : "n/a",
+      "id" : 100
+    } ],
+    "languageProfs" : [ ],
+    "name" : "Urchin",
+    "personalities" : [ {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 98
+    }, {
+      "type" : "BackgroundDetail",
+      "backgroundDetailType" : "PERSONALITY",
+      "description" : "n/a",
+      "id" : 99
+    } ],
+    "savingThrowProfs" : [ ],
+    "skillProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 16,
+      "name" : "Sleight of Hand",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 17,
+      "name" : "Stealth",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "toolProfs" : [ {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 139,
+      "name" : "Disguise Kit",
+      "poisoned" : false,
+      "silvered" : false
+    }, {
+      "attuned" : false,
+      "cursed" : false,
+      "description" : "",
+      "id" : 158,
+      "name" : "Thieves' Tools",
+      "poisoned" : false,
+      "silvered" : false
+    } ],
+    "variations" : [ ],
+    "weaponProfs" : [ ],
+    "weaponTypeProfs" : [ ]
+  } ]
+}

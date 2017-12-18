@@ -106,7 +106,6 @@ public class MainActivity extends AppCompatActivity
                         ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
                 ContentResolver.requestSync(GeneralAccount.getAccount(), GeneralAccount.getAUTHORITY(), settingsBundle);
                 CharacterListFragment frag = (CharacterListFragment) getSupportFragmentManager().findFragmentById(R.id.character_list_fragment);
-                frag.refresh();
         }
 
         return super.onOptionsItemSelected(item);

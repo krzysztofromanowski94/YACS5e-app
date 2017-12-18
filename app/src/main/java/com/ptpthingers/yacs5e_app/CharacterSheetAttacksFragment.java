@@ -1,6 +1,7 @@
 package com.ptpthingers.yacs5e_app;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -77,7 +78,7 @@ public class CharacterSheetAttacksFragment extends Fragment {
                 mAttackList.add(new Attack());
                 mAdapter.notifyItemInserted(mAttackList.size());
                 mCurrentChar.setmAttacks(mAttackList);
-                mCurrentChar.post();
+                mCurrentChar.post(getContext().getSharedPreferences("account", Context.MODE_PRIVATE).getString("username", ""));
             }
         });
 

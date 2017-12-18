@@ -4,9 +4,6 @@
     android:id="@+id/attacks_fragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    card_view:cardCornerRadius="4dp"
-    card_view:cardElevation="4dp"
     card_view:cardUseCompatPadding="true">
 
     <LinearLayout
@@ -36,7 +33,9 @@
                 android:layout_gravity="start"
                 android:layout_row="1"
                 android:text="Weapon"
-                android:textSize="@dimen/card_title" />
+                android:textAllCaps="false"
+                android:textSize="@dimen/card_title"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_column="1"
@@ -54,7 +53,8 @@
                 android:layout_gravity="center"
                 android:layout_row="1"
                 android:text="+0"
-                android:textSize="@dimen/card_title" />
+                android:textSize="@dimen/card_title"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_column="2"
@@ -71,7 +71,8 @@
                 android:layout_gravity="center"
                 android:layout_row="1"
                 android:text="0d0"
-                android:textSize="@dimen/card_title" />
+                android:textSize="@dimen/card_title"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_column="3"
@@ -88,7 +89,8 @@
                 android:layout_gravity="center"
                 android:layout_row="1"
                 android:text="slashing"
-                android:textSize="@dimen/card_title" />
+                android:textSize="@dimen/card_title"
+                android:textStyle="bold" />
 
         </GridLayout>
 
@@ -116,7 +118,8 @@
                 android:layout_gravity="center"
                 android:layout_row="1"
                 android:text="0"
-                android:textSize="@dimen/card_title" />
+                android:textSize="@dimen/card_title"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -135,7 +138,8 @@
                 android:layout_gravity="center"
                 android:layout_row="1"
                 android:text="STR"
-                android:textSize="@dimen/card_title" />
+                android:textSize="@dimen/card_title"
+                android:textStyle="bold" />
 
         </GridLayout>
 

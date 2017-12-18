@@ -20,7 +20,9 @@ class Character {
     private Integer mPortrait;
     private Integer mProfBonus;
 
-    private Integer mHealth;
+    private Integer mMaxHealth;
+    private Integer mCurrentHealth;
+    private Integer mTempHealth;
     private Integer mArmorClass;
     private Integer mSpeed;
     private Integer mInitiative;
@@ -31,8 +33,9 @@ class Character {
     private AbilityScore strScore, dexScore, conScore, intScore, wisScore, chaScore;
     private SavingThrow strSave, dexSave, conSave, intSave, wisSave, chaSave;
     private HashMap<String, Proficiency> skills;
+    private List<String> miscProfs;
 
-    private HashMap<String, Integer> levels;
+    private HashMap<HashMap<String, String>, Integer> levels;
     private String race;
     private List<Feature> traits;
     private String mUuid;
@@ -206,11 +209,11 @@ class Character {
         this.skills = skills;
     }
 
-    public HashMap<String, Integer> getLevels() {
+    public HashMap<HashMap<String, String>, Integer> getLevels() {
         return levels;
     }
 
-    public void setLevels(HashMap<String, Integer> levels) {
+    public void setLevels(HashMap<HashMap<String,String>, Integer> levels) {
         this.levels = levels;
     }
 
@@ -220,14 +223,6 @@ class Character {
 
     public void setmProfBonus(Integer mProfBonus) {
         this.mProfBonus = mProfBonus;
-    }
-
-    public Integer getmHealth() {
-        return mHealth;
-    }
-
-    public void setmHealth(Integer mHealth) {
-        this.mHealth = mHealth;
     }
 
     public Integer getmArmorClass() {
@@ -270,6 +265,38 @@ class Character {
         this.mAttacks = mAttacks;
     }
 
+    public Integer getmMaxHealth() {
+        return mMaxHealth;
+    }
+
+    public void setmMaxHealth(Integer mMaxHealth) {
+        this.mMaxHealth = mMaxHealth;
+    }
+
+    public Integer getmCurrentHealth() {
+        return mCurrentHealth;
+    }
+
+    public void setmCurrentHealth(Integer mCurrentHealth) {
+        this.mCurrentHealth = mCurrentHealth;
+    }
+
+    public Integer getmTempHealth() {
+        return mTempHealth;
+    }
+
+    public void setmTempHealth(Integer mTempHealth) {
+        this.mTempHealth = mTempHealth;
+    }
+
+    public List<String> getMiscProfs() {
+        return miscProfs;
+    }
+
+    public void setMiscProfs(List<String> miscProfs) {
+        this.miscProfs = miscProfs;
+    }
+
     public String post(String ownerLogin) {
         if (mUuid == null) {
             mUuid = UUID.randomUUID().toString();
@@ -297,7 +324,9 @@ class Character {
         this.wisSave = new SavingThrow();
         this.chaSave = new SavingThrow();
 
-        this.mHealth = 0;
+        this.mMaxHealth = 0;
+        this.mCurrentHealth = 0;
+        this.mTempHealth = 0;
         this.mArmorClass = 0;
         this.mSpeed = 0;
         this.mInitiative = 0;
@@ -307,7 +336,7 @@ class Character {
         this.race = "";
         this.levels = new HashMap<>();
         this.skills = new HashMap<>();
-        skills.put("Acrobatics", Proficiency.DOUBLE);
+        this.miscProfs = new LinkedList<>();
         this.mHitDice = new HashMap<>();
         this.mProfBonus = 2;
 
@@ -333,7 +362,9 @@ class Character {
         this.wisSave = tempChar.getWisSave();
         this.chaSave = tempChar.getChaSave();
 
-        this.mHealth = tempChar.getmHealth();
+        this.mMaxHealth = tempChar.getmMaxHealth();
+        this.mCurrentHealth = tempChar.getmCurrentHealth();
+        this.mTempHealth = tempChar.getmTempHealth();
         this.mArmorClass = tempChar.getmArmorClass();
         this.mSpeed = tempChar.getmSpeed();
         this.mInitiative = tempChar.getmInitiative();

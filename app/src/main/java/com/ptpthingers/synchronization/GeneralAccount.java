@@ -28,7 +28,7 @@ public final class GeneralAccount {
      * Gets the standard sync account for our app.
      * @return {@link Account}
      */
-    private static Account getAccount() {
+    public static Account getAccount() {
         return new Account(ACCOUNT_NAME, ACCOUNT_TYPE);
     }
 

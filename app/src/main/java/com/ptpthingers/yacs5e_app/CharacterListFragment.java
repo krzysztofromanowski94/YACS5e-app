@@ -1,5 +1,6 @@
 package com.ptpthingers.yacs5e_app;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -81,9 +82,5 @@ public class CharacterListFragment extends Fragment {
     public static void addItem(int position, String item) {
         mCharacterList.add(position, item);
         mAdapter.notifyItemInserted(position);
-    }
-
-    public static void refresh() {
-        mAdapter.notifyDataSetChanged();
     }
 }

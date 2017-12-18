@@ -18,7 +18,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets { main { resources.srcDirs = ['src/main/resources', 'src/main/proto'] } }
+    sourceSets {
+        main {
+            resources.srcDirs = ['src/main/resources', 'src/main/proto']
+            assets.srcDirs = ['src/main/assets', 'src/main/Mechanics/']
+        }
+    }
     productFlavors {
     }
 }

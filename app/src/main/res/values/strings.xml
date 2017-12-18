@@ -20,6 +20,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="title_activity_character_sheet">CharacterSheetActivity</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse faucibus, massa et luctus luctus, nibh velit dictum ligula, vitae suscipit justo neque vitae lectus. Pellentesque sed metus eget nunc semper bibendum in vitae augue. Ut vel nisl ut eros molestie faucibus. Sed id ullamcorper tellus. Fusce quis efficitur odio, a varius est. Aliquam erat volutpat. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam at nisi pellentesque nunc lobortis sollicitudin. In eget orci a ligula bibendum venenatis. Vivamus sed imperdiet ante. Aenean tempus risus nec sollicitudin ultrices. </string>
     <string name="section_format">Hello World from section: %1$d</string>
 
     <!--Menu items-->

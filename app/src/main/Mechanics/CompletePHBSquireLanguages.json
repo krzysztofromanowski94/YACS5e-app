@@ -1,0 +1,114 @@
+{
+  "dbVersion" : 31,
+  "objects" : [ {
+    "type" : "Language",
+    "hash" : 9,
+    "name" : "Abyssal",
+    "script" : "Infernal"
+  }, {
+    "type" : "Language",
+    "hash" : 0,
+    "name" : "Aquan",
+    "script" : ""
+  }, {
+    "type" : "Language",
+    "hash" : 0,
+    "name" : "Auran",
+    "script" : ""
+  }, {
+    "type" : "Language",
+    "hash" : 10,
+    "name" : "Celestial",
+    "script" : "Celestial"
+  }, {
+    "type" : "Language",
+    "hash" : 1,
+    "name" : "Common",
+    "script" : "Common"
+  }, {
+    "type" : "Language",
+    "hash" : 12,
+    "name" : "Deep Speech",
+    "script" : ""
+  }, {
+    "type" : "Language",
+    "hash" : 11,
+    "name" : "Draconic",
+    "script" : "Draconic"
+  }, {
+    "type" : "Language",
+    "hash" : 16,
+    "name" : "Druidic",
+    "script" : ""
+  }, {
+    "type" : "Language",
+    "hash" : 2,
+    "name" : "Dwarvish",
+    "script" : "Dwarvish"
+  }, {
+    "type" : "Language",
+    "hash" : 3,
+    "name" : "Elvish",
+    "script" : "Elvish"
+  }, {
+    "type" : "Language",
+    "hash" : 4,
+    "name" : "Giant",
+    "script" : "Dwarvish"
+  }, {
+    "type" : "Language",
+    "hash" : 5,
+    "name" : "Gnomish",
+    "script" : "Dwarvish"
+  }, {
+    "type" : "Language",
+    "hash" : 6,
+    "name" : "Goblin",
+    "script" : "Dwarvish"
+  }, {
+    "type" : "Language",
+    "hash" : 7,
+    "name" : "Halfling",
+    "script" : "Common"
+  }, {
+    "type" : "Language",
+    "hash" : 0,
+    "name" : "Ignan",
+    "script" : ""
+  }, {
+    "type" : "Language",
+    "hash" : 13,
+    "name" : "Infernal",
+    "script" : "Infernal"
+  }, {
+    "type" : "Language",
+    "hash" : 8,
+    "name" : "Orc",
+    "script" : "Dwarvish"
+  }, {
+    "type" : "Language",
+    "hash" : 14,
+    "name" : "Primordial",
+    "script" : "Dwarvish"
+  }, {
+    "type" : "Language",
+    "hash" : 15,
+    "name" : "Sylvan",
+    "script" : "Elvish"
+  }, {
+    "type" : "Language",
+    "hash" : 0,
+    "name" : "Terran",
+    "script" : ""
+  }, {
+    "type" : "Language",
+    "hash" : 16,
+    "name" : "Thieves' Cant",
+    "script" : ""
+  }, {
+    "type" : "Language",
+    "hash" : 16,
+    "name" : "Undercommon",
+    "script" : "Elvish"
+  } ]
+}
