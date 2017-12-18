@@ -1,18 +1,16 @@
 package com.ptpthingers.yacs5e_app;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.ptpthingers.synchronization.DBWrapper;
 
@@ -30,8 +28,6 @@ public class CharacterListFragment extends Fragment {
     private SharedPreferences accountSharedPreferences;
 
 
-    private OnFragmentInteractionListener mListener;
-
     public CharacterListFragment() {
         // Required empty public constructor
     }
@@ -46,8 +42,7 @@ public class CharacterListFragment extends Fragment {
             String username = accountSharedPreferences.getString("username", "");
             mCharacterList.addAll(DBWrapper.getUuidList(username));
         } catch (NullPointerException npe) {
-            TextView tv = getActivity().findViewById(R.id.empty_list_text);
-            tv.setText("No characters yet!\nTap the plus icon to create!");
+            Log.d("CharacterList", "onCreate: Empty List!");
         }
     }
 
@@ -65,7 +60,7 @@ public class CharacterListFragment extends Fragment {
         mAdapter = new CharacterAdapter(mCharacterList);
         mRecyclerView.setAdapter(mAdapter);
 
-        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab_add_character);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,42 +73,6 @@ public class CharacterListFragment extends Fragment {
         return rootView;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mCurrentVisiblePosition = 0;
-        mCurrentVisiblePosition = ((LinearLayoutManager)mRecyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        ((LinearLayoutManager)mRecyclerView.getLayoutManager()).scrollToPosition(mCurrentVisiblePosition);
-        mCurrentVisiblePosition = 0;
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
-
     public static void deleteItem(int position) {
         mCharacterList.remove(position);
         mAdapter.notifyItemRemoved(position);
@@ -122,5 +81,9 @@ public class CharacterListFragment extends Fragment {
     public static void addItem(int position, String item) {
         mCharacterList.add(position, item);
         mAdapter.notifyItemInserted(position);
+    }
+
+    public static void refresh() {
+        mAdapter.notifyDataSetChanged();
     }
 }

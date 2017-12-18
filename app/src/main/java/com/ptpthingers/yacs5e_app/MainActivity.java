@@ -1,6 +1,5 @@
 package com.ptpthingers.yacs5e_app;
 
-import android.content.ContentProvider;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,10 +20,11 @@ import com.ptpthingers.synchronization.DBWrapper;
 import com.ptpthingers.synchronization.GeneralAccount;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, CharacterListFragment.OnFragmentInteractionListener,
+        implements NavigationView.OnNavigationItemSelectedListener,
         CampaignList.OnFragmentInteractionListener {
 
     public static final String CHAR_UUID = "character_uuid";
+    private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity
                 e.printStackTrace();
             }
 
-            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.flContent, fragment)
                     .commit();
@@ -98,6 +98,15 @@ public class MainActivity extends AppCompatActivity
         switch (id) {
             case R.id.action_settings:
                 return true;
+            case R.id.action_manual_sync:
+                Bundle settingsBundle = new Bundle();
+                settingsBundle.putBoolean(
+                        ContentResolver.SYNC_EXTRAS_MANUAL, true);
+                settingsBundle.putBoolean(
+                        ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
+                ContentResolver.requestSync(GeneralAccount.getAccount(), GeneralAccount.getAUTHORITY(), settingsBundle);
+                CharacterListFragment frag = (CharacterListFragment) getSupportFragmentManager().findFragmentById(R.id.character_list_fragment);
+                frag.refresh();
         }
 
         return super.onOptionsItemSelected(item);

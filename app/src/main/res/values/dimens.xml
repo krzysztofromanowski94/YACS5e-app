@@ -13,7 +13,7 @@
     <dimen name="skill_separator_margin">10dp</dimen>
 
     <!--Text values-->
-    <dimen name="card_title">15sp</dimen>
+    <dimen name="card_title">16sp</dimen>
     <dimen name="card_sub">12sp</dimen>
     <dimen name="char_sheet_tab_text">18sp</dimen>
     <dimen name="ability_score_view_height">45sp</dimen>

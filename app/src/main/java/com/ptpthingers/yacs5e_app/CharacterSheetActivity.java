@@ -108,6 +108,10 @@ public class CharacterSheetActivity extends AppCompatActivity {
                     CharacterSheetSkillsFragment fr1 = new CharacterSheetSkillsFragment();
                     fr1.setArguments(bundle);
                     return fr1;
+                case 2:
+                    CharacterSheetAttacksFragment fr2 = new CharacterSheetAttacksFragment();
+                    fr2.setArguments(bundle);
+                    return fr2;
                 default:
                     return PlaceholderFragment.newInstance(position + 1);
             }

@@ -26,7 +26,6 @@ import java.util.List;
 public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder> {
 
     public static final String CHAR_UUID = "character_uuid";
-
     private static List<String> mUuidList;
 
     public CharacterAdapter(List<String> uuidList) {
