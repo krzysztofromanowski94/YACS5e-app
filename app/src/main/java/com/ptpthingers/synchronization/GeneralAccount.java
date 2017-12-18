@@ -6,21 +6,19 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.ptpthingers.yacs5e_app.R;
-
 public final class GeneralAccount {
     /**
      * This is the type of account we are using. i.e. we can specify our app or apps
      * to have different types, such as 'read-only', 'sync-only', & 'admin'.
      */
-    private static final String ACCOUNT_TYPE = "com.ptpthingers.yacs5e";
+    private static final String ACCOUNT_TYPE = "com.ptpthingers.synchronization";
 
     /**
      * This is the name that appears in the Android 'Accounts' settings.
      */
     private static final String ACCOUNT_NAME = "Example Sync";
 
-    final static String AUTHORITY = "com.ptpthingers.synchronization";
+    private final static String AUTHORITY = "com.ptpthingers.synchronization";
 
     public static String getAUTHORITY() {
         return AUTHORITY;
@@ -30,7 +28,7 @@ public final class GeneralAccount {
      * Gets the standard sync account for our app.
      * @return {@link Account}
      */
-    public static Account getAccount() {
+    private static Account getAccount() {
         return new Account(ACCOUNT_NAME, ACCOUNT_TYPE);
     }
 
@@ -45,7 +43,6 @@ public final class GeneralAccount {
 
         // Attempt to explicitly create the account with no password or extra data
         if (manager.addAccountExplicitly(account, null, null)) {
-//            final String AUTHORITY = "com.ptpthingers.yacs5e";
             final long SYNC_FREQUENCY = 10 * 60; // 10 minutes (seconds)
 
             // Inform the system that this account supports sync

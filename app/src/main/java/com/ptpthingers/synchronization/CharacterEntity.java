@@ -2,8 +2,6 @@ package com.ptpthingers.synchronization;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
 import com.google.protobuf.ByteString;
@@ -11,26 +9,32 @@ import com.ptpthingers.yacs5e_app.TCharacter;
 import com.ptpthingers.yacs5e_app.TTalk;
 
 
-@Entity(tableName = "characters")
+@Entity(tableName = "characters", primaryKeys = {"uuid", "owner_login"})
 public class CharacterEntity {
-    @PrimaryKey
     @ColumnInfo(name = "uuid")
     @NonNull
     private String uuid;
+
+    @ColumnInfo(name = "owner_login")
+    @NonNull
+    private String ownerLogin;
+
     @ColumnInfo(name = "last_sync")
     private long lastSync;
+
     @ColumnInfo(name = "last_mod")
     private long lastMod;
-    @ColumnInfo(name = "owner_login")
-    private String ownerLogin;
+
     @ColumnInfo(name = "data")
     private String data;
+
     @ColumnInfo(name = "to_delete")
     private boolean toDelete;
 
-    public CharacterEntity(@NonNull String uuid, String data) {
-        this.data = data;
+    public CharacterEntity(@NonNull String uuid, @NonNull String ownerLogin, String data) {
         this.uuid = uuid;
+        this.ownerLogin = ownerLogin;
+        this.data = data;
         this.toDelete = false;
         lastMod = System.currentTimeMillis() / 1000L;
     }

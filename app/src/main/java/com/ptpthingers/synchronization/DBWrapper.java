@@ -15,19 +15,19 @@ public class DBWrapper {
 
     /////////////////////////////////////////////////////////////////////////////////
 
-    public static List<String> getUuidList() {
+    public static List<String> getUuidList(String username) {
         try {
-            return new GetUuidList().execute().get();
+            return new GetUuidList().execute(username).get();
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    private static class GetUuidList extends AsyncTask<Void, Void, List<String>> {
+    private static class GetUuidList extends AsyncTask<String, Void, List<String>> {
         @Override
-        protected List<String> doInBackground(Void... voids) {
-            return DBInstance.getHook().characterDao().getAllUuid();
+        protected List<String> doInBackground(String... strings) {
+            return DBInstance.getHook().characterDao().getAllUuid(strings[0]);
         }
     }
 
@@ -85,24 +85,6 @@ public class DBWrapper {
 
     /////////////////////////////////////////////////////////////////////////////////
 
-    public static List<CharacterEntity> getCharEntityList() {
-        try {
-            return new GetList().execute().get();
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private static class GetList extends AsyncTask<Void, Void, List<CharacterEntity>> {
-        @Override
-        protected List<CharacterEntity> doInBackground(Void... voids) {
-            return DBInstance.getHook().characterDao().getAllCharacters();
-        }
-    }
-
-    /////////////////////////////////////////////////////////////////////////////////
-
     public static void setToDelete(String uuid) {
         try {
             new SetToDelete().execute(uuid).get();
@@ -131,7 +113,6 @@ public class DBWrapper {
     }
 
     private static class UnsetToDelete extends AsyncTask<String, Void, Void> {
-
         @Override
         protected Void doInBackground(String... strings) {
             DBInstance.getHook().characterDao().unsetToDelete(strings[0]);
@@ -139,7 +120,17 @@ public class DBWrapper {
         }
     }
 
-    // ToDo usuń na podstawie uuid
-    // ToDo dodaj cofnij usuń na podstawie uuid
-    // ToDo jeśtli check toDelete - nie zwracaj w getUuidList
+    /////////////////////////////////////////////////////////////////////////////////
+
+    public static void setOwnerForAllOrphans(String owner_login) {
+        new SetOwnerForAllOrphans().execute(owner_login);
+    }
+
+    private static class SetOwnerForAllOrphans extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... strings) {
+            DBInstance.getHook().characterDao().setOwnerForAllOrphans(strings[0]);
+            return null;
+        }
+    }
 }

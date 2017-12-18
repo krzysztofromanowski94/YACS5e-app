@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ptpthingers.grpctasks.GrpcLogin;
+import com.ptpthingers.grpctasks.GrpcRegister;
 import com.ptpthingers.grpctasks.GrpcResult;
 
 import java.util.concurrent.ExecutionException;
@@ -78,7 +79,24 @@ public class LoginScreen extends AppCompatActivity {
         public void onClick(View view) {
             if (!validate()) return;
 
-            //TODO
+            GrpcResult result;
+            try {
+                result = new GrpcRegister(getApplicationContext()).execute(
+                        mLoginText.getText().toString(),
+                        mPassText.getText().toString(),
+                        "token")
+                        .get();
+            } catch (InterruptedException | ExecutionException e) {
+                result = new GrpcResult(false, "Something very wrong happened.");
+                e.printStackTrace();
+            }
+            if (result.isOk()) {
+                Toast.makeText(getApplicationContext(), "Successfully registered user " + mLoginText.getText().toString(), Toast.LENGTH_SHORT).show();
+                accountSharedPreferences.edit().putString("username", mLoginText.getText().toString()).apply();
+                accountSharedPreferences.edit().putString("password", mPassText.getText().toString()).apply();
+            } else {
+                Toast.makeText(getApplicationContext(), "Error registering...", Toast.LENGTH_SHORT).show();
+            }
 
         }
     };

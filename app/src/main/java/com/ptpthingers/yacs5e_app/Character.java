@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.ptpthingers.synchronization.CharacterEntity;
 import com.ptpthingers.synchronization.DBWrapper;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -13,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 
-class Character implements Serializable {
+class Character {
     private static final int defaultScore = 14;
 
     private String mCharName;
@@ -271,11 +270,14 @@ class Character implements Serializable {
         this.mAttacks = mAttacks;
     }
 
-    public String post() {
+    public String post(String ownerLogin) {
         if (mUuid == null) {
             mUuid = UUID.randomUUID().toString();
         }
-        DBWrapper.insertCharEntity(new CharacterEntity(mUuid, new GsonBuilder().create().toJson(this)));
+        DBWrapper.insertCharEntity(new CharacterEntity(
+                mUuid,
+                ownerLogin,
+                new GsonBuilder().create().toJson(this)));
         return mUuid;
     }
 
@@ -346,5 +348,14 @@ class Character implements Serializable {
 
         this.mShortDesc = tempChar.mShortDesc;
         this.traits = tempChar.getTraits();
+    }
+
+    @Override
+    public String toString() {
+        return "Character{" +
+                "mCharName='" + mCharName + '\'' +
+                ", mShortDesc='" + mShortDesc + '\'' +
+                ", mUuid='" + mUuid + '\'' +
+                '}';
     }
 }
