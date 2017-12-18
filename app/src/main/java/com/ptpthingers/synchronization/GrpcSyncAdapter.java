@@ -116,7 +116,7 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
         // 4 - not on server - receive empty uuid, send complete character
         // 5 - to be deleted - set Character.Delete=true, send to server
         // <6> - not on client - if server have more characters it will send them one-by-one until TTalk.Good=true
-        for (CharacterEntity characterEntity : db.characterDao().getAllCharacters()) {
+        for (CharacterEntity characterEntity : db.characterDao().getAllCharacters(accountSharedPreferences.getString("username", ""))) {
             // send message about this character
             requestStream.onNext(
                     TTalk.newBuilder()
@@ -177,7 +177,10 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
                 }
 
                 TCharacter responseChar = received.getCharacter();
-                CharacterEntity charFromServer = new CharacterEntity(responseChar.getUuid(), responseChar.getBlob().toString());
+                CharacterEntity charFromServer = new CharacterEntity(
+                        responseChar.getUuid(),
+                        accountSharedPreferences.getString("username", ""),
+                        responseChar.getBlob());
                 charFromServer.setLastSync(responseChar.getLastSync());
                 charFromServer.setLastMod(responseChar.getLastMod());
 
@@ -234,7 +237,7 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
                 characterEntity.setUuid(charOnServer.getCharacter().getUuid());
                 characterEntity.setLastSync(charOnServer.getCharacter().getLastSync());
                 characterEntity.setLastMod(charOnServer.getCharacter().getLastMod());
-                characterEntity.setData(charOnServer.getCharacter().getBlob().toString());
+                characterEntity.setData(charOnServer.getCharacter().getBlob());
 
                 db.characterDao().insertCharacter(characterEntity);
             }
@@ -275,7 +278,10 @@ public class GrpcSyncAdapter extends AbstractThreadedSyncAdapter {
 
             switch (charReceived.getUnionCase()) {
                 case CHARACTER:
-                    CharacterEntity characterEntity = new CharacterEntity(charReceived.getCharacter().getUuid(), charReceived.getCharacter().getBlob().toString());
+                    CharacterEntity characterEntity = new CharacterEntity(
+                            charReceived.getCharacter().getUuid(),
+                            accountSharedPreferences.getString("username", ""),
+                            charReceived.getCharacter().getBlob());
                     characterEntity.setUuid(charReceived.getCharacter().getUuid());
                     characterEntity.setLastSync(charReceived.getCharacter().getLastSync());
                     characterEntity.setLastMod(charReceived.getCharacter().getLastMod());

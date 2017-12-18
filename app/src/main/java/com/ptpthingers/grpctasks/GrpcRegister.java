@@ -1,7 +1,9 @@
 package com.ptpthingers.grpctasks;
 
+
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.ptpthingers.synchronization.DBWrapper;
 import com.ptpthingers.synchronization.ManagedChannelSingleton;
@@ -11,11 +13,10 @@ import com.ptpthingers.yacs5e_app.YACS5eGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.StatusRuntimeException;
 
-
-public class GrpcLogin extends AsyncTask<String, Void, GrpcResult> {
+public class GrpcRegister extends AsyncTask<String, Void, GrpcResult> {
     private Context context;
 
-    public GrpcLogin(Context context) {
+    public GrpcRegister(Context context) {
         super();
         this.context = context;
     }
@@ -45,21 +46,16 @@ public class GrpcLogin extends AsyncTask<String, Void, GrpcResult> {
                     .setPassword(userpass)
                     .build();
 
-            // send login request. If fail, description message will be returned in catch{} block
-            stub.login(user);
+            // send register request. If fail, description message will be returned in catch{} block
+            stub.registration(user);
 
             DBWrapper.setOwnerForAllOrphans(username);
 
-            // no StatusRuntimeException so user is signed in
-            return new GrpcResult(true, "Successfully signed in!");
+            // no StatusRuntimeException so user is registered
+            return new GrpcResult(true, "Successfully registered!");
+        } catch (StatusRuntimeException e) {
+            Log.i("Registration", e.getMessage());
+            return new GrpcResult(false, "Couldn't register!\n" + e.getMessage());
         }
-        catch (StatusRuntimeException e) {
-            return new GrpcResult(false, "Couldn't sign in!\n" + e.getMessage());
-        }
-    }
-
-    @Override
-    protected void onPostExecute(GrpcResult grpcResult) {
-        super.onPostExecute(grpcResult);
     }
 }

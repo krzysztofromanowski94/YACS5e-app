@@ -10,17 +10,14 @@ import java.util.List;
 
 @Dao
 public interface CharacterDao {
-    @Query("SELECT * FROM characters")
-    List<CharacterEntity> getAllCharacters();
+    @Query("SELECT * FROM characters WHERE owner_login = :ownerLogin")
+    List<CharacterEntity> getAllCharacters(String ownerLogin);
 
-    @Query("SELECT uuid FROM characters WHERE to_delete = 0")
-    List<String> getAllUuid();
+    @Query("SELECT uuid FROM characters WHERE to_delete = 0 AND owner_login = :ownerLogin ORDER BY last_mod DESC")
+    List<String> getAllUuid(String ownerLogin);
 
     @Query("SELECT * FROM characters WHERE uuid = :uuid")
     CharacterEntity getCharacter(String uuid);
-
-    @Query("SELECT COUNT(*) FROM characters")
-    Integer count();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertCharacter(CharacterEntity characterEntity);
@@ -39,4 +36,7 @@ public interface CharacterDao {
 
     @Query("DELETE FROM characters")
     void truncate();
+
+    @Query("UPDATE characters SET owner_login= :ownerLogin WHERE owner_login=''")
+    void setOwnerForAllOrphans(String ownerLogin);
 }

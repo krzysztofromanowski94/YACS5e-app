@@ -1,6 +1,7 @@
 package com.ptpthingers.yacs5e_app;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -26,6 +27,8 @@ public class CharacterListFragment extends Fragment {
     private int mCurrentVisiblePosition;
     private static CharacterAdapter mAdapter;
     private static LinkedList<String> mCharacterList;
+    private SharedPreferences accountSharedPreferences;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -37,9 +40,11 @@ public class CharacterListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mCurrentVisiblePosition = 0;
+        accountSharedPreferences = getContext().getSharedPreferences("account", Context.MODE_PRIVATE);
         mCharacterList = new LinkedList<>();
         try {
-            mCharacterList.addAll(DBWrapper.getUuidList());
+            String username = accountSharedPreferences.getString("username", "");
+            mCharacterList.addAll(DBWrapper.getUuidList(username));
         } catch (NullPointerException npe) {
             TextView tv = getActivity().findViewById(R.id.empty_list_text);
             tv.setText("No characters yet!\nTap the plus icon to create!");
@@ -64,7 +69,8 @@ public class CharacterListFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mCharacterList.add(new Character().post());
+                String username = accountSharedPreferences.getString("username", "");
+                mCharacterList.add(new Character().post(username));
                 mAdapter.notifyItemInserted(mCharacterList.size());
             }
         });
